@@ -1,0 +1,18 @@
+class RoundTest is subclass of ClassTest
+
+operations
+	private testRoundCreation: () ==> ()
+	testRoundCreation() ==
+	(
+		dcl manager : Manager := new Manager("Ezio Auditore", "Italian");
+		dcl team : Team := new Team("The Creed", manager);
+		dcl car : Car := new Car("Ford", "Fiesta", 2002, 500, "4wd", 1000, team, 1);
+		dcl date : Date := new Date(2017, 12, 28, 19, 30, 00);
+		dcl round_time : int := 6600;
+		
+		dcl round : Round := new Round(round_time, date, car);
+		assertTrue(round.car = car);
+		assertTrue(round.date = date);
+		assertTrue(round.round_time = round_time);
+	);
+end RoundTest

@@ -6,7 +6,7 @@ values
 instance variables
 -- TODO Define instance variables here
 operations
-	private assertTrue: bool ==> ()
+	public assertTrue: bool ==> ()
 	 	assertTrue(cond) == return
 	 	pre cond;
 	 	
