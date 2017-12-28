@@ -1,34 +1,48 @@
 class Team
 instance variables
-  team_members:set of (TeamMember);
-  cars:set of (Car);
-  manager:Manager;
-  sponsors:set of (Sponsor);
-  events:set of (Event);
-  name:seq of (char);
+  public team_members:set of (TeamMember);
+  public cars:set of (Car);
+  public manager:Manager;
+  public sponsors:set of (Sponsor);
+  public events:set of (Event);
+  public name:seq of (char);
 
 operations
-  public  Team : seq of (char) ==> Team
-  Team(nm) ==
+  public  Team : seq of (char) * Manager ==> Team
+  Team(nm, mngr) ==
     (
     name := nm;
     events := {};
     sponsors := {};
     cars := {};
-    team_members := {};
+    team_members := {mngr};
+    manager := mngr;
     );
 
-  public  addDriver : seq of (char) * seq of (char) ==> ?
-  addDriver(name, nationality) ==
-    is not yet specified;
+  public  addDriver : seq of (char) * seq of (char) ==> ()
+  addDriver(nm, nati) ==
+    (
+    dcl driver : Driver := new Driver(nm, nati);
+    team_members := team_members union {driver};
+    )
+    post getMember(nm) in set team_members;
+  
 
-  public  addCoDriver : seq of (char) * seq of (char) ==> ?
-  addCoDriver(name, nationality) ==
-    is not yet specified;
+  public  addCoDriver : seq of (char) * seq of (char) ==> ()
+  addCoDriver(nm, nati) ==
+    (
+    dcl co_driver : CoDriver := new CoDriver(nm, nati);
+    team_members := team_members union {co_driver};
+    );
 
-  public  addMechanic : seq of (char) * seq of (char) ==> ?
-  addMechanic(name, nationality) ==
-    is not yet specified;
+
+  public  addMechanic : seq of (char) * seq of (char) ==> ()
+  addMechanic(nm, nati) ==
+    (
+    dcl mechanic : Mechanic := new Mechanic(nm, nati);
+    team_members := team_members union {mechanic};
+    );
+
 
   public  addCar : seq of (char) * seq of (char) * int * int * seq of (char) * int ==> ?
   addCar(make, model, year, bhp, traction, weight) ==
@@ -54,13 +68,30 @@ operations
   addManager(nm, nati) ==
     is not yet specified;
 
-  public  getCar : int ==> Car
+  public pure  getCar : int ==> [Car]
   getCar(n) ==
-    is not yet specified;
+    (
+		dcl ret_car:[Car] := nil;
+		
+		for all car in set cars do
+			if car.number = n
+			then return car;
+		return ret_car;
+		)
+		pre cars <> {}
+		post RESULT in set cars or RESULT = nil;
 
-  public  getMember : seq of (char) ==> TeamMember
+  public pure  getMember : seq of (char) ==> [TeamMember]
   getMember(nm) ==
-    is not yet specified;
-
-
+    (
+		dcl ret_member:[TeamMember] := nil;
+		
+		for all member in set team_members do
+			if member.name = nm
+			then return member;
+		return ret_member;
+		)
+		pre team_members <> {}
+		post RESULT in set team_members or RESULT = nil;
+	
 end Team
