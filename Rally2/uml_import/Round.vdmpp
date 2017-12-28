@@ -5,9 +5,14 @@ instance variables
   round_time:int;
 
 operations
-  public  Round : int * Date ==> Round
-  Round(r_t, dt) ==
-    is not yet specified;
+  public  Round : int * Date * Car ==> Round
+  Round(r_t, dt, cr) ==
+    (
+    	car := cr;
+    	date := dt;
+    	round_time := r_t;
+    	return self;
+    )
 
 
 end Round

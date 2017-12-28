@@ -1,11 +1,13 @@
-class AtoB
+class AtoB is subclass of Event
 instance variables
-  round:set of (Round);
+  public round:set of (Round);
 
 operations
-  public  addRound : seq of (char) * int * Date ==> ?
+  public  addRound : seq of (char) * int * Date ==> ()
   addRound(car, round_time, date) ==
-    is not yet specified;
+    (
+    	
+    )
 
   public  getCarRounds : Car ==> Round
   getCarRounds(car) ==
@@ -21,7 +23,15 @@ operations
 
   public  AtoB : seq of (char) * seq of (char) ==> AtoB
   AtoB(nm, loc) ==
-    is not yet specified;
+  (
+    teams := {};
+    beginning_date := undefined;
+  	end_date := undefined;
+  	name := nm;
+  	location := loc;
+  	round := {};
+  	return self;
+   )
 
 
 end AtoB

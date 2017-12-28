@@ -1,10 +1,10 @@
 class Event
 instance variables
-  teams:set of (Team);
-  beginning_date:Date;
-  end_date:Date;
-  name:seq of (char);
-  location:seq of (char);
+  public teams:set of (Team);
+  public beginning_date:Date;
+  public end_date:Date;
+  public name:seq of (char);
+  public location:seq of (char);
 
 operations
   public  addTeam : Team ==> ?

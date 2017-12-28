@@ -1,8 +1,8 @@
 class CarResult
 instance variables
-  event:Event;
-  car:Car;
-  position:int;
+  public event:Event;
+  public car:Car;
+  public position:int;
 
 operations
   public  CarResult : Car * Event * int ==> CarResult
