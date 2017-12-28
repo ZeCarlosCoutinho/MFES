@@ -1,0 +1,10 @@
+class Manager is subclass of TeamMember
+operations
+  public  Manager : seq of (char) * seq of (char) ==> Manager
+  Manager(nm, nati) ==
+    (
+    nationality := nati;
+    name := nm;
+    )
+
+end Manager

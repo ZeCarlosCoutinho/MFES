@@ -1,0 +1,10 @@
+class Driver is subclass of TeamMember
+operations
+  public  Driver : seq of (char) * seq of (char) ==> Driver
+  Driver(nm, nati) ==
+    (
+    nationality := nati;
+    name := nm;
+    )
+
+end Driver

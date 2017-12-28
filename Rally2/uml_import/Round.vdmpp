@@ -1,0 +1,13 @@
+class Round
+instance variables
+  car:Car;
+  date:Date;
+  round_time:int;
+
+operations
+  public  Round : int * Date ==> Round
+  Round(r_t, dt) ==
+    is not yet specified;
+
+
+end Round

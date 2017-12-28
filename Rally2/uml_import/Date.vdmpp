@@ -1,0 +1,16 @@
+class Date
+instance variables
+  year:int;
+  month:int;
+  day:int;
+  hours:int;
+  minutes:int;
+  seconds:int;
+
+operations
+  public  Date : int * int * int * int * int * int ==> Date
+  Date(yr, mnth, d, hrs, mnts, scnds) ==
+    is not yet specified;
+
+
+end Date

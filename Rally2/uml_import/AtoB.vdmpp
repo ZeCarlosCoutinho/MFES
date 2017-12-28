@@ -1,0 +1,27 @@
+class AtoB
+instance variables
+  round:set of (Round);
+
+operations
+  public  addRound : seq of (char) * int * Date ==> ?
+  addRound(car, round_time, date) ==
+    is not yet specified;
+
+  public  getCarRounds : Car ==> Round
+  getCarRounds(car) ==
+    is not yet specified;
+
+  public  sortRounds : ()  ==> ?
+  sortRounds() ==
+    is not yet specified;
+
+  public  getFinalResults : ()  ==> Round
+  getFinalResults() ==
+    is not yet specified;
+
+  public  AtoB : seq of (char) * seq of (char) ==> AtoB
+  AtoB(nm, loc) ==
+    is not yet specified;
+
+
+end AtoB
