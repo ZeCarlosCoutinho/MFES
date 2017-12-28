@@ -1,4 +1,4 @@
-class RoundTest is subclass of ClassTest
+class RoundTest is subclass of TestCase
 
 operations
 	private testRoundCreation: () ==> ()

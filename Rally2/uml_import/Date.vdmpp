@@ -10,7 +10,13 @@ instance variables
 operations
   public  Date : int * int * int * int * int * int ==> Date
   Date(yr, mnth, d, hrs, mnts, scnds) ==
-    is not yet specified;
-
+  (
+  	year := yr;
+  	month := mnth;
+  	day := d;
+  	hours := hrs;
+  	minutes := mnts;
+  	seconds := scnds;
+  );
 
 end Date
