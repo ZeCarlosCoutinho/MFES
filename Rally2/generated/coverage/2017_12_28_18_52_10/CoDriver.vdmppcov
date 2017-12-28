@@ -1,0 +1,10 @@
+class CoDriver is subclass of TeamMember
+operations
+  public  CoDriver : seq of (char) * seq of (char) ==> CoDriver
+  CoDriver(nm, nati) ==
+    (
+    nationality := nati;
+    name := nm;
+    )
+
+end CoDriver

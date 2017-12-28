@@ -1,0 +1,15 @@
+class Event
+instance variables
+  public teams:set of (Team);
+  public beginning_date:Date;
+  public end_date:Date;
+  public name:seq of (char);
+  public location:seq of (char);
+
+operations
+  public  addTeam : Team ==> ?
+  addTeam(team) ==
+    is not yet specified;
+
+
+end Event

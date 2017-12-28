@@ -1,0 +1,19 @@
+class SpecialStage
+instance variables
+  stages:set of (Stage);
+
+operations
+  public  addStage : seq of (char) * int * Date ==> ?
+  addStage(name, distance, date) ==
+    is not yet specified;
+
+  public  getResults : ()  ==> StageResult
+  getResults() ==
+    is not yet specified;
+
+  public  SpecialStage : seq of (char) * seq of (char) * Date * Date ==> SpecialStage
+  SpecialStage(nm, loc, bg_date, e_date) ==
+    is not yet specified;
+
+
+end SpecialStage
