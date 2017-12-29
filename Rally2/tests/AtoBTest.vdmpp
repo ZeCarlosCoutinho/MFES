@@ -14,8 +14,6 @@ operations
 		dcl round : Round := new Round(round_time, date, car);
 		
 		atob.addRound(car, round_time, date);
-		assertTrue(atob.round(1).car = round.car and 
-								atob.round(1).date = round.date and
-								atob.round(1).round_time = round.round_time);
+		assertTrue(round.isequal(atob.round(1)));
 	);
 end AtoBTest

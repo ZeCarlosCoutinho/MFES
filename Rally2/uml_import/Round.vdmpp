@@ -13,5 +13,15 @@ operations
     	round_time := r_t;
     	return self;
     );
-
+    
+  public isequal : [Round] ==> bool
+  isequal(rnd) ==
+  (
+		if self.car = rnd.car
+		then return true
+		else return false;   	
+  )
+  pre rnd <> nil;
+  
+  
 end Round
