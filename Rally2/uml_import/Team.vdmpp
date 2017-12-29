@@ -58,28 +58,28 @@ operations
     pre cars = {} or getCar(number) = nil
     post getCar(number) in set cars;
 
-  public  assignDriver : Car * Driver ==> ()
+  public  assignDriver : [Car] * [Driver] ==> ()
   assignDriver(car, driver) ==
     (
     car.setDriver(driver);
     )
-    pre car in set cars and driver in set team_members
+    pre car in set cars and driver in set team_members and car <> nil and driver <> nil
     post car.driver = driver;
 
-  public  assignCoDriver : Car * CoDriver ==> ()
+  public  assignCoDriver : [Car] * [CoDriver] ==> ()
   assignCoDriver(car, co_driver) ==
     (
     car.setCoDriver(co_driver);
     )
-    pre car in set cars and co_driver in set team_members
+    pre car in set cars and co_driver in set team_members and car <> nil and co_driver <> nil
     post car.co_driver = co_driver;
 
-  public  assignMechanic : Car * Mechanic ==> ()
+  public  assignMechanic : [Car] * [Mechanic] ==> ()
   assignMechanic(car, mechanic) ==
     (
     car.addMechanic(mechanic);
     )
-    pre car in set cars and mechanic in set team_members
+    pre car in set cars and mechanic in set team_members and mechanic <> nil and car <> nil
     post mechanic in set car.mechanics;
 
   public  getEventResults : ()  ==> ?

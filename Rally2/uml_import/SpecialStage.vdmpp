@@ -1,11 +1,15 @@
-class SpecialStage
+class SpecialStage is subclass of Event
 instance variables
-  stages:set of (Stage);
+  public stages:set of (Stage);
 
 operations
-  public  addStage : seq of (char) * int * Date ==> ?
-  addStage(name, distance, date) ==
-    is not yet specified;
+  public  addStage : seq of (char) * int * int * Date ==> ()
+  addStage(nm, number, distance, date) ==
+    (
+    dcl stage:Stage := new Stage(nm, distance, number, date, self);
+    stages := stages union {stage};
+    );
+    
 
   public  getResults : ()  ==> StageResult
   getResults() ==
@@ -13,7 +17,27 @@ operations
 
   public  SpecialStage : seq of (char) * seq of (char) * Date * Date ==> SpecialStage
   SpecialStage(nm, loc, bg_date, e_date) ==
-    is not yet specified;
+    (
+    name := nm;
+    location := loc;
+    beginning_date := bg_date;
+    end_date := e_date;
+    stages := {};
+    teams := {};
+    );
+    
+	public pure  getStage : int ==> [Stage]
+  getStage(n) ==
+    (
+		dcl ret_stage:[Stage] := nil;
+		
+		for all stage in set stages do
+			if stage.number = n
+			then return stage;
+		return ret_stage;
+		)
+		pre stages <> {}
+		post RESULT in set stages or RESULT = nil;
 
 
 end SpecialStage

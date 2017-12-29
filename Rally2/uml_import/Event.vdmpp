@@ -7,9 +7,12 @@ instance variables
   public location:seq of (char);
 
 operations
-  public  addTeam : Team ==> ?
+  public  addTeam : Team ==> ()
   addTeam(team) ==
-    is not yet specified;
-
+    (
+    teams := teams union {team}
+    )
+    pre team not in set teams
+    post team in set teams;
 
 end Event

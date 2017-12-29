@@ -1,12 +1,14 @@
 class StageResult
 instance variables
-  car:Car;
-  stage_time:int;
+  public car:Car;
+  public stage_time:int;
 
 operations
   public  StageResult : Car * int ==> StageResult
   StageResult(c, s_t) ==
-    is not yet specified;
-
+    (
+    car := c;
+    stage_time := s_t;
+    );
 
 end StageResult

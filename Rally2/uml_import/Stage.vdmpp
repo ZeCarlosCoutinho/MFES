@@ -1,27 +1,70 @@
 class Stage
 instance variables
-  stageResult:set of (StageResult);
-  date:Date;
-  name:seq of (char);
-  distance:int;
-  number:int;
+	public event:Event;
+  public stage_results:seq of (StageResult);
+  public date:Date;
+  public name:seq of (char);
+  public distance:int;
+  public number:int;
 
 operations
-  public  Stage : seq of (char) * int * int * Date ==> Stage
-  Stage(n, d, nmbr, dt) ==
-    is not yet specified;
+  public  Stage : seq of (char) * int * int * Date * Event==> Stage
+  Stage(n, d, nmbr, dt, evnt) ==
+    (
+    name := n;
+    number := nmbr;
+    date := dt;
+    distance  := d;
+    stage_results := [];
+    event := evnt;
+    );
 
-  public  addStageResult : Car * int ==> ?
+  public  addStageResult : Car * int ==> ()
   addStageResult(c, s_t) ==
-    is not yet specified;
+    (
+    dcl result:StageResult := new StageResult(c, s_t);
+    stage_results := stage_results ^ [result];
+    IO`println(stage_results);
+    )
+    pre s_t > 0 and c.team in set event.teams and getStageResult(c.number) = nil
+    post getStageResult(c.number) <> nil;
 
-  public  sortResults : ()  ==> ?
+  public  sortResults : ()  ==> ()
   sortResults() ==
-    is not yet specified;
+    (
+    SelectionSortResults(1);
+    );
 
-  public  getStageResult : int ==> StageResult
+  public pure getStageResult : int ==> [StageResult]
   getStageResult(c_number) ==
-    is not yet specified;
+    (
+   	dcl ret_result:[StageResult] := nil;
+		
+		for all result in set elems stage_results do
+			if result.car.number = c_number
+			then return result;
+		return ret_result;
+    );
+    
+  SelectionSortResults : nat ==> ()
+	SelectionSortResults (i) ==
+		if i < len stage_results
+		then (dcl temp: StageResult;
+		dcl mi : nat := min_index(stage_results(i,...,len stage_results)) + i - 1;
+		temp := stage_results(mi);
+		stage_results(mi) := stage_results(i);
+		stage_results(i) := temp;
+		SelectionSortResults(i+1)
+	);
 
+functions
+	min_index : seq1 of StageResult -> nat
+	min_index(l) ==
+	if len l = 1
+	then 1
+	else let mi = min_index(tl l)
+	in if l(mi+1).stage_time < l(1).stage_time
+	then mi+1
+	else 1;
 
 end Stage
