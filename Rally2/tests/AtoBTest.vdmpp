@@ -1,0 +1,21 @@
+class AtoBTest is subclass of TestCase
+operations
+	private testAddRound: () ==> ()
+	testAddRound() ==
+	(
+		dcl date : Date := new Date(2017, 12, 28, 19, 30, 00);
+		dcl end_date : Date := new Date(2017, 12, 31, 20, 0 , 0);
+		dcl manager : Manager := new Manager("Ezio Auditore", "Italian");
+		dcl team : Team := new Team("The Creed", manager);
+		dcl car : Car := new Car("Ford", "Fiesta", 2002, 500, "4wd", 1000, team, 1);
+		dcl round_time : int := 6600;
+		
+		dcl atob : AtoB := new AtoB("Super Mario Mountain Climb", "Italy", date, end_date);
+		dcl round : Round := new Round(round_time, date, car);
+		
+		atob.addRound(car, round_time, date);
+		assertTrue(atob.round(1).car = round.car and 
+								atob.round(1).date = round.date and
+								atob.round(1).round_time = round.round_time);
+	);
+end AtoBTest
