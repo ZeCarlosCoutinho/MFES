@@ -18,5 +18,20 @@ operations
   	minutes := mnts;
   	seconds := scnds;
   );
+  
+  -- TODO : Add to Model
+  public isequal : [Date] ==> bool
+  isequal(dt) ==
+  (
+  	if	self.year = dt.year and 
+  			self.month = dt.month and
+  			self.day = dt.day and
+  			self.hours = dt.hours and
+  			self.minutes = dt.minutes and
+ 				self.seconds = dt.seconds
+ 		then return true
+ 		else return false; 
+  )
+  pre dt <> nil;
 
 end Date
