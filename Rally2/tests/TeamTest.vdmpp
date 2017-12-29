@@ -87,11 +87,25 @@ private testStageSort: () ==> ()
 		event.getStage(1).addStageResult(team2.getCar(10), 145800);
 		event.getStage(1).addStageResult(team2.getCar(11), 115400);
 		
-		event.getStage(1).sortResults();
+		event.getStage(2).addStageResult(team.getCar(1), 939922);
+		event.getStage(2).addStageResult(team.getCar(2), 929227);
+		event.getStage(2).addStageResult(team2.getCar(10), 941544);
+		event.getStage(2).addStageResult(team2.getCar(11), 940578);
 		
-		assertTrue(event.getStage(1).stage_results(1).stage_time < event.getStage(1).stage_results(2).stage_time);
-		assertTrue(event.getStage(1).stage_results(2).stage_time < event.getStage(1).stage_results(3).stage_time);
-		assertTrue(event.getStage(1).stage_results(3).stage_time < event.getStage(1).stage_results(4).stage_time);
+		event.getStage(3).addStageResult(team.getCar(1), 643099);
+		event.getStage(3).addStageResult(team.getCar(2), 645199);
+		event.getStage(3).addStageResult(team2.getCar(10), 658434);
+		event.getStage(3).addStageResult(team2.getCar(11), 637224);
+		
+		for all stage in set event.stages do
+		(
+			stage.sortResults();
+			for sr = 1 to len stage.stage_results - 1 do
+			(
+			assertTrue(stage.stage_results(sr).stage_time < stage.stage_results(sr + 1).stage_time);
+			);
+		);
+		
 		
 	);
 
