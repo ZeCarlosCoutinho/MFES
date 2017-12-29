@@ -18,7 +18,6 @@ operations
     (
     driver := drvr;
     )
-    pre drvr <> undefined
     post driver = drvr;
 
   public  setCoDriver : CoDriver ==> ()
@@ -26,7 +25,6 @@ operations
     (
     co_driver := co_drvr;
     )
-    pre co_drvr <> undefined
     post co_driver = co_drvr;
 
   public  addMechanic : Mechanic ==> ()
@@ -34,7 +32,6 @@ operations
     (
     mechanics := mechanics union {mechanic};
     )
-    pre mechanic <> undefined
     post mechanic in set mechanics;
     
 

@@ -1,0 +1,58 @@
+class TeamTest is subclass of TestCase
+
+operations
+private testTeam: () ==> ()
+	testTeam() ==
+	(
+		dcl manager:Manager := new Manager("Malcom Wilson", "British");
+		dcl team:Team := new Team("M-Sport", manager);
+		dcl sponsor_ford:Sponsor := new Sponsor("Ford");
+		dcl sponsor_castrol:Sponsor := new Sponsor("Castrol EDGE");
+		dcl sponsor_michelin:Sponsor := new Sponsor("Michelen");
+		dcl sponsor_onebet:Sponsor := new Sponsor("OneBet");
+		dcl sponsor_msrt:Sponsor := new Sponsor("MS-RT");
+		
+		team.addCar("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, 1);
+		team.addCar("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, 2);
+		team.addCar("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, 3);
+		assertTrue(card team.cars = 3);
+		
+		
+		team.addDriver("Sébastien Ogier", "French");
+		team.assignDriver(team.getCar(1), team.getMember("Sébastien Ogier"));
+		team.addCoDriver("Julien Ingrassia", "French");
+		team.assignCoDriver(team.getCar(1), team.getMember("Julien Ingrassia"));
+		team.addDriver("Ott Tänak", "Estonian");
+		team.assignDriver(team.getCar(2), team.getMember("Ott Tänak"));
+		team.addCoDriver("Martin Järveoja", "Estonian");
+		team.assignCoDriver(team.getCar(2), team.getMember("Martin Järveoja"));
+		team.addDriver("Elfyn Evans", "British");
+		team.assignDriver(team.getCar(3), team.getMember("Elfyn Evans"));
+		team.addCoDriver("Daniel Barritt", "British");
+		team.assignCoDriver(team.getCar(3), team.getMember("Daniel Barritt"));
+		team.addMechanic("William Lawrence", "British");
+		team.addMechanic("Reiner Buchwald", "German");
+		team.assignMechanic(team.getCar(1), team.getMember("William Lawrence"));
+		team.assignMechanic(team.getCar(1), team.getMember("Reiner Buchwald"));
+		team.addMechanic("Roderick Gilbert", "Scottish");
+		team.assignMechanic(team.getCar(2), team.getMember("Roderick Gilbert"));
+		team.addMechanic("Felipe Warner", "Brazilian");
+		team.assignMechanic(team.getCar(3), team.getMember("Felipe Warner"));
+		assertTrue(card team.team_members = 11);
+		assertTrue(team.getCar(1).driver.name = "Sébastien Ogier");
+		assertTrue(team.getCar(1).co_driver.name = "Julien Ingrassia");
+		assertTrue(card team.getCar(1).mechanics = 2);
+		assertTrue(team.getCar(1).mechanics = {team.getMember("William Lawrence"), team.getMember("Reiner Buchwald")});
+		
+		team.addSponsor(sponsor_ford);
+		team.addSponsor(sponsor_castrol);
+		team.addSponsor(sponsor_michelin);
+		team.addSponsor(sponsor_onebet);
+		team.addSponsor(sponsor_msrt);
+		assertTrue(card team.sponsors = 5);
+		assertTrue(team.sponsors = {sponsor_ford, sponsor_castrol, sponsor_michelin, sponsor_onebet, sponsor_msrt});
+		
+		IO`println(team);
+	);
+
+end TeamTest
