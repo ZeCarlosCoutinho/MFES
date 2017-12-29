@@ -13,11 +13,12 @@ operations
     	round_time := r_t;
     	return self;
     );
-    
+   
+  --TODO: Add to Model
   public isequal : [Round] ==> bool
   isequal(rnd) ==
   (
-		if self.car = rnd.car
+		if self.car = rnd.car and self.date.isequal(rnd.date) and self.round_time = rnd.round_time
 		then return true
 		else return false;   	
   )
