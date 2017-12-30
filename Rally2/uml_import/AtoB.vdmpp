@@ -43,10 +43,28 @@ operations
   (
   	SelectionSortResults(1);
   );
+  --TODO Do the post condition, to check if x.round_time > x+1.round_time
 
-  public  getFinalResults : ()  ==> Round
+  public getFinalResults : ()  ==> seq of Round
   getFinalResults() ==
-    is not yet specified;
+  (
+  	dcl result : seq of Round := [];
+  	dcl not_in_results : bool := true;
+  
+  	self.sortRounds();
+  	for n = 1 to len round do
+  	(
+  		not_in_results := true;
+  		for m = 1 to len result do
+  			if result(m).car = round(n).car
+  			then not_in_results := false;
+  		if not_in_results
+  		then result := result ^ [round(n)];
+  	);
+  	
+  	return result;
+  )
+  pre len round > 0;
 
   public  AtoB : seq of (char) * seq of (char) * Date * Date==> AtoB
   AtoB(nm, loc, beginning_d, end_d) ==
@@ -90,6 +108,13 @@ functions
 	in if l(mi+1).round_time < l(1).round_time
 	then mi+1
 	else 1;
+	
+	--isSorted : seq of Round -> bool
+	--isSorted(rnds) ==
+	--	let ind in seq rnds be st
+		--	forall ind' in set inds rnds
+		--		& (ind' > ind and rnds(ind').round_time >= rnds(ind).round_time)
+		--		in; 
 
 
 end AtoB

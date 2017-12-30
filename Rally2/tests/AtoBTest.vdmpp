@@ -45,6 +45,7 @@ operations
 		assertTrue(result(2).isequal(atob.round(3)));
 	);
 	
+	-- TODO: Insert the rounds manually. If addRound fails, this test fails too
 	private testSortRounds: () ==> ()
 	testSortRounds()==
 	(
@@ -78,5 +79,43 @@ operations
 		assertTrue(round3.isequal(atob.round(3)));
 		assertTrue(round4.isequal(atob.round(1)));
 		
+	);
+	
+	private testGetFinalRounds: () ==> ()
+	testGetFinalRounds() ==
+	(
+		dcl date1 : Date := new Date(2017, 12, 28, 19, 30, 00);
+		dcl end_date : Date := new Date(2017, 12, 31, 20, 0 , 0);
+		dcl manager1 : Manager := new Manager("Ezio Auditore", "Italian");
+		dcl manager2 : Manager := new Manager("Il Padrino", "Italian");		
+		dcl team1 : Team := new Team("The Creed", manager1);
+		dcl team2 : Team := new Team("The Templars", manager2);
+		dcl car1 : Car := new Car("Ford", "Fiesta", 2002, 500, "4wd", 1000, team1, 1);
+		dcl car2 : Car := new Car("Citroen", "Xsara", 2000, 450, "4wd", 1450, team1, 2);
+		dcl car3 : Car := new Car("Fiat", "Punto", 1999, 300, "2wd", 900, team2, 3);
+		dcl round_time1 : int := 6600;
+		dcl round_time2: int := 7000;
+		dcl round_time3: int := 6650;
+		dcl round_time4: int := 5505;
+		dcl round_time5: int := 4500;
+		dcl round_time6: int := 6690;
+		
+		dcl atob : AtoB := new AtoB("Super Mario Mountain Climb", "Italy", date1, end_date);
+		dcl round1 : Round := new Round(round_time1, date1, car1);
+		dcl round2 : Round := new Round(round_time2, date1, car2);
+		dcl round3 : Round := new Round(round_time3, date1, car3);
+		dcl round4 : Round := new Round(round_time4, date1, car1);
+		dcl round5 : Round := new Round(round_time5, date1, car2);
+		dcl round6 : Round := new Round(round_time6, date1, car3);
+		
+		dcl results : seq of Round;
+		
+		atob.round := [round1, round2, round3, round4, round5, round6];
+		
+		results := atob.getFinalResults();
+		assertTrue(len results = 3);
+		assertTrue(results(1) = round5);
+		assertTrue(results(2) = round4);
+		assertTrue(results(3) = round3);
 	);
 end AtoBTest
