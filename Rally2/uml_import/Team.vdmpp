@@ -82,10 +82,10 @@ operations
     pre car in set cars and mechanic in set team_members and mechanic <> nil and car <> nil
     post mechanic in set car.mechanics;
 
-  public  getEventResults : ()  ==> set of (CarResult)
+  public  getEventResults : ()  ==> seq of (CarResult)
   getEventResults() ==
     (
-	    dcl ret_set:set of (CarResult):= {};
+	    dcl ret_seq:seq of (CarResult):= [];
 	    for all event in set events do
 	    (
 	    	
@@ -104,11 +104,26 @@ operations
 	    			);
 	    			
 	    			res := new CarResult(car, event, pos);
-	    			ret_set := ret_set union {res};
+	    			ret_seq := ret_seq ^ [res];
+	    		);
+	    		if isofclass(AtoB, event)
+	    		then(
+	    			dcl atob: AtoB := event;
+	    			dcl res:CarResult;
+	    			dcl pos:int := 0;
+	    			
+	    			for n = 1 to len atob.getFinalResults() do 
+	    			(
+	    				if atob.getFinalResults()(n).car = car
+	    				then pos := n;
+	    			);
+	    			
+	    			res := new CarResult(car, event, pos);
+	    			ret_seq := ret_seq ^ [res];
 	    		);
 	    	);
 	    );
-	    return ret_set;
+	    return ret_seq;
     );
 
   public pure  getCar : int ==> [Car]

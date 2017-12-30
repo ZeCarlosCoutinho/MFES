@@ -55,5 +55,106 @@ private testTeam: () ==> ()
 		assertTrue(team.getMember("") = nil);
 	);
 	
+private testTeamResults: () ==> ()
+	testTeamResults() ==
+	(
+		dcl manager:Manager := new Manager("Malcom Wilson", "British");
+		dcl team:Team := new Team("M-Sport", manager);
+		
+		dcl manager2:Manager := new Manager("Tommi Mäkinen", "Finish");
+		dcl team2:Team := new Team("TOYOTA GAZOO RACING WRT", manager2);
+		
+		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", new Date(), new Date());
+		dcl event2:AtoB := new AtoB("Pikes Peak International Hill Climb", "Pikes Peak, Colorado, USA", new Date(), new Date());
+		
+		dcl team_results : seq of (CarResult);
+		dcl team2_results : seq of (CarResult);
+		
+		team.addCar("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, 1);
+		team.addCar("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, 2);
+		
+		team2.addCar("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, 10);
+		team2.addCar("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, 11);
+		
+		event.addStage("SS1 LOUSADA", 1, 3360, new Date());
+		event.addStage("SS2 VIANA DO CASTELO 1", 2, 26700, new Date());
+		event.addStage("SS3 CAMINHA 1", 3, 18100, new Date());
+		
+		event.addTeam(team);
+		event.addTeam(team2);
+		event2.addTeam(team);
+		event2.addTeam(team2);
+		
+		event.getStage(1).addStageResult(team.getCar(1), 157300);
+		event.getStage(1).addStageResult(team.getCar(2), 147200);
+		event.getStage(1).addStageResult(team2.getCar(10), 145800);
+		event.getStage(1).addStageResult(team2.getCar(11), 115400);
+		
+		event.getStage(2).addStageResult(team.getCar(1), 939922);
+		event.getStage(2).addStageResult(team.getCar(2), 929227);
+		event.getStage(2).addStageResult(team2.getCar(10), 941544);
+		event.getStage(2).addStageResult(team2.getCar(11), 940578);
+		
+		event.getStage(3).addStageResult(team.getCar(1), 643099);
+		event.getStage(3).addStageResult(team.getCar(2), 645199);
+		event.getStage(3).addStageResult(team2.getCar(10), 658434);
+		event.getStage(3).addStageResult(team2.getCar(11), 637224);
+		
+		event2.addRound(team.getCar(1), 546157, new Date());
+		event2.addRound(team.getCar(1), 546249, new Date());
+		event2.addRound(team.getCar(1), 548578, new Date());
+		
+		event2.addRound(team.getCar(2), 547122, new Date());
+		event2.addRound(team.getCar(2), 557935, new Date());
+		event2.addRound(team.getCar(2), 548239, new Date());
+		
+		event2.addRound(team2.getCar(10), 559935, new Date());
+		event2.addRound(team2.getCar(10), 554679, new Date());
+		event2.addRound(team2.getCar(10), 562486, new Date());
+		
+		event2.addRound(team2.getCar(11), 551356, new Date());
+		event2.addRound(team2.getCar(11), 566036, new Date());
+		event2.addRound(team2.getCar(11), 541092, new Date());
+		
+		team_results := team.getEventResults();
+		team2_results := team2.getEventResults();
+		
+		assertTrue(team_results(1).car.number = 1 and team_results(1).event.name = "Pikes Peak International Hill Climb" and team_results(1).position = 2);
+		assertTrue(team_results(2).car.number = 2 and team_results(2).event.name = "Pikes Peak International Hill Climb" and team_results(2).position = 3);
+		assertTrue(team_results(3).car.number = 1 and team_results(3).event.name = "Vodafone Rally de Portugal" and team_results(3).position = 3);
+		assertTrue(team_results(4).car.number = 2 and team_results(4).event.name = "Vodafone Rally de Portugal" and team_results(4).position = 2);
+		
+		assertTrue(team2_results(1).car.number = 10 and team2_results(1).event.name = "Pikes Peak International Hill Climb" and team2_results(1).position = 4);
+		assertTrue(team2_results(2).car.number = 11 and team2_results(2).event.name = "Pikes Peak International Hill Climb" and team2_results(2).position = 1);
+		assertTrue(team2_results(3).car.number = 10 and team2_results(3).event.name = "Vodafone Rally de Portugal" and team2_results(3).position = 4);
+		assertTrue(team2_results(4).car.number = 11 and team2_results(4).event.name = "Vodafone Rally de Portugal" and team2_results(4).position = 1);
+		
+		/*
+		IO`println("Team 1");
+		for all cr in set elems team_results do
+		(
+		IO`print(cr.car.number);
+		IO`print("  ");
+		IO`print(cr.event.name);
+		IO`print("  ");
+		IO`print(cr.position);
+		IO`println("");
+		);
+		
+		IO`println("");
+		IO`println("Team 2");
+		for all cr in set elems team2_results do
+		(
+		IO`print(cr.car.number);
+		IO`print("  ");
+		IO`print(cr.event.name);
+		IO`print("  ");
+		IO`print(cr.position);
+		IO`println("");
+		)
+		*/
+		
+	);
+	
 
 end TeamTest
