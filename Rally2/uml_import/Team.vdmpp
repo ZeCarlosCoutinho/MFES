@@ -82,9 +82,34 @@ operations
     pre car in set cars and mechanic in set team_members and mechanic <> nil and car <> nil
     post mechanic in set car.mechanics;
 
-  public  getEventResults : ()  ==> ?
+  public  getEventResults : ()  ==> set of (CarResult)
   getEventResults() ==
-    is not yet specified;
+    (
+	    dcl ret_set:set of (CarResult):= {};
+	    for all event in set events do
+	    (
+	    	
+	    	for all car in set cars do
+	    	(
+	    		if isofclass(SpecialStage, event)
+	    		then(
+	    			dcl ss: SpecialStage := event;
+	    			dcl res:CarResult;
+	    			dcl pos:int := 0;
+	    			
+	    			for n = 1 to len ss.getResults().stage_results do 
+	    			(
+	    				if ss.getResults().stage_results(n).car = car
+	    				then pos := n;
+	    			);
+	    			
+	    			res := new CarResult(car, event, pos);
+	    			ret_set := ret_set union {res};
+	    		);
+	    	);
+	    );
+	    return ret_set;
+    );
 
   public pure  getCar : int ==> [Car]
   getCar(n) ==
@@ -117,6 +142,15 @@ operations
     (
     sponsors := sponsors union {spsr};
     )
+    pre spsr not in set sponsors
     post spsr in set sponsors;
+  
+  public  addEvent : Event ==> ()
+  addEvent(event) ==
+    (
+    events := events union {event};
+    )
+    pre event not in set events
+    post event in set events;
 	
 end Team
