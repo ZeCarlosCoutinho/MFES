@@ -15,4 +15,27 @@ operations
 		assertTrue(round.date = date);
 		assertTrue(round.round_time = round_time);
 	);
+	
+	private testIsEqual: () ==> ()
+	testIsEqual() ==
+	(
+		dcl manager1 : Manager := new Manager("Ezio Auditore", "Italian");
+		dcl manager2 : Manager := new Manager("Il Padrino", "Italian");		
+		dcl team1 : Team := new Team("The Creed", manager1);
+		dcl team2 : Team := new Team("The Templars", manager2);
+		dcl car1 : Car := new Car("Ford", "Fiesta", 2002, 500, "4wd", 1000, team1, 1);
+		dcl car2 : Car := new Car("Fiat", "Punto", 1999, 300, "2wd", 900, team2, 3);
+		dcl date : Date := new Date(2017, 12, 28, 19, 30, 00);
+		dcl round_time1 : int := 6600;
+		dcl round_time2 : int := 5000;
+		
+		dcl round1 : Round := new Round(round_time1, date, car1);
+		dcl round2 : Round := new Round(round_time1, date, car1);
+		dcl round3 : Round := new Round(round_time2, date, car1);
+		dcl round4 : Round := new Round(round_time1, date, car2);
+		
+		assertTrue(round1.isequal(round2));
+		assertFalse(round1.isequal(round3));
+		assertFalse(round1.isequal(round4));
+	);
 end RoundTest

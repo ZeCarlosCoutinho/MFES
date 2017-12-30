@@ -1,0 +1,53 @@
+class CarTest is subclass of TestCase
+operations
+	private testSetDriver: () ==> ()
+	testSetDriver() ==
+	(
+		dcl driver1 : Driver := new Driver("Leonardo DiCaprio", "American");
+		dcl driver2 : Driver := new Driver("Il Padrino", "Italian");
+		dcl manager : Manager := new Manager("Ezio Auditore", "Italian");
+		dcl team : Team := new Team("The Creed", manager);
+		dcl car : Car := new Car("Ford", "Fiesta", 2002, 500, "4wd", 1000, team, 1);
+		
+		car.setDriver(driver1);
+		assertTrue(car.driver = driver1);
+		car.setDriver(driver2);
+		assertTrue(car.driver = driver2);
+	);
+	
+	private testSetCoDriver: () ==> ()
+	testSetCoDriver() ==
+	(
+		dcl manager : Manager := new Manager("Ezio Auditore", "Italian");
+		dcl team : Team := new Team("The Creed", manager);
+		dcl car : Car := new Car("Ford", "Fiesta", 2002, 500, "4wd", 1000, team, 1);
+		
+		dcl codriver1 : CoDriver := new CoDriver("Il Padrino", "Italian");
+		dcl codriver2 : CoDriver := new CoDriver("Leonardo DiCaprio", "American");
+		
+		car.setCoDriver(codriver1);
+		assertTrue(car.co_driver = codriver1);
+		car.setCoDriver(codriver2);
+		assertTrue(car.co_driver = codriver2);
+		
+	);
+	
+	private testAddMechanic : () ==> ()
+	testAddMechanic() ==
+	(
+		dcl manager : Manager := new Manager("Ezio Auditore", "Italian");
+		dcl team : Team := new Team("The Creed", manager);
+		dcl car : Car := new Car("Ford", "Fiesta", 2002, 500, "4wd", 1000, team, 1);
+		
+		dcl mechanic1 : Mechanic := new Mechanic("Il Padrino", "Italian");
+		dcl mechanic2 : Mechanic := new Mechanic("Leonardo DiCaprio", "American");
+		
+		assertTrue(card car.mechanics = 0);
+		car.addMechanic(mechanic1);
+		assertTrue(card car.mechanics = 1);
+		assertTrue(mechanic1 in set car.mechanics);
+		car.addMechanic(mechanic2);
+		assertTrue(card car.mechanics = 2);
+		assertTrue(mechanic1 in set car.mechanics and mechanic2 in set car.mechanics);
+	);
+end CarTest

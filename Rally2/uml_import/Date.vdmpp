@@ -1,34 +1,37 @@
 class Date
+types
+	public CalendarDate ::	year : nat
+													month : nat
+													day : nat;
+	public TimeStamp ::	hours : nat
+											minutes : nat
+											seconds : nat;
 instance variables
-  year:int;
-  month:int;
-  day:int;
-  hours:int;
-  minutes:int;
-  seconds:int;
+	calendardate : CalendarDate := mk_CalendarDate(0, 0, 0);
+	timestamp : TimeStamp := mk_TimeStamp(0, 0, 0);
 
 operations
   public  Date : int * int * int * int * int * int ==> Date
   Date(yr, mnth, d, hrs, mnts, scnds) ==
   (
-  	year := yr;
-  	month := mnth;
-  	day := d;
-  	hours := hrs;
-  	minutes := mnts;
-  	seconds := scnds;
+  	calendardate.year := yr;
+  	calendardate.month := mnth;
+  	calendardate.day := d;
+  	timestamp.hours := hrs;
+  	timestamp.minutes := mnts;
+  	timestamp.seconds := scnds;
   );
   
   -- TODO : Add to Model
   public isequal : [Date] ==> bool
   isequal(dt) ==
   (
-  	if	self.year = dt.year and 
-  			self.month = dt.month and
-  			self.day = dt.day and
-  			self.hours = dt.hours and
-  			self.minutes = dt.minutes and
- 				self.seconds = dt.seconds
+  	if	self.calendardate.year = dt.calendardate.year and 
+  			self.calendardate.month = dt.calendardate.month and
+  			self.calendardate.day = dt.calendardate.day and
+  			self.timestamp.hours = dt.timestamp.hours and
+  			self.timestamp.minutes = dt.timestamp.minutes and
+ 				self.timestamp.seconds = dt.timestamp.seconds
  		then return true
  		else return false; 
   )
