@@ -3,8 +3,9 @@ instance variables
   public round:seq of (Round);
 
 operations
-
+	--
 	-- Adds a car's Round result to the AtoB event
+	--
   public  addRound : Car * int * Date ==> ()
   addRound(car, round_time, date) ==
     (
@@ -16,7 +17,9 @@ operations
     	and date <> undefined
     post getRound(car, date) in set elems round;
 
+	-- 
 	-- Gets the Round results of a car
+	--
   public  getCarRounds : [Car] ==> seq of Round
   getCarRounds(car) ==
   (
@@ -32,9 +35,14 @@ operations
   )
   pre car <> nil;
 
-  public  sortRounds : ()  ==> ?
+	--
+	-- Sorts the Rounds by time
+	--
+  public  sortRounds : ()  ==> ()
   sortRounds() ==
-    is not yet specified;
+  (
+  	SelectionSortResults(1);
+  );
 
   public  getFinalResults : ()  ==> Round
   getFinalResults() ==
@@ -61,6 +69,27 @@ operations
    	 return undefined; --When no Round is found
    )
    pre car <> nil and date <> nil;
+   
+  SelectionSortResults : nat ==> ()
+	SelectionSortResults (i) ==
+		if i < len round
+		then (dcl temp: Round;
+		dcl mi : nat := min_index(round(i,...,len round)) + i - 1;
+		temp := round(mi);
+		round(mi) := round(i);
+		round(i) := temp;
+		SelectionSortResults(i+1)
+	);
+
+functions
+	min_index : seq1 of Round -> nat
+	min_index(l) ==
+	if len l = 1
+	then 1
+	else let mi = min_index(tl l)
+	in if l(mi+1).round_time < l(1).round_time
+	then mi+1
+	else 1;
 
 
 end AtoB

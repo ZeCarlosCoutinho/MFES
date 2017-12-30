@@ -44,4 +44,39 @@ operations
 		assertTrue(result(1).isequal(atob.round(1)));
 		assertTrue(result(2).isequal(atob.round(3)));
 	);
+	
+	private testSortRounds: () ==> ()
+	testSortRounds()==
+	(
+		dcl date1 : Date := new Date(2017, 12, 28, 19, 30, 00);
+		dcl date2 : Date := new Date(2017, 12, 28, 20, 30, 00);
+		dcl end_date : Date := new Date(2017, 12, 31, 20, 0 , 0);
+		dcl manager : Manager := new Manager("Ezio Auditore", "Italian");
+		dcl team : Team := new Team("The Creed", manager);
+		dcl car1 : Car := new Car("Ford", "Fiesta", 2002, 500, "4wd", 1000, team, 1);
+		dcl car2 : Car := new Car("Citroen", "Xsara", 2000, 450, "4wd", 1450, team, 1);
+		dcl round_time1 : int := 6600;
+		dcl round_time2: int := 7000;
+		dcl round_time3: int := 6650;
+		dcl round_time4: int := 5505;
+		
+		dcl atob : AtoB := new AtoB("Super Mario Mountain Climb", "Italy", date1, end_date);
+		dcl round1 : Round := new Round(round_time1, date1, car1);
+		dcl round2 : Round := new Round(round_time2, date1, car2);
+		dcl round3 : Round := new Round(round_time3, date2, car1);
+		dcl round4 : Round := new Round(round_time4, date2, car2);
+				
+		atob.addRound(car1, round_time1, date1);
+		atob.addRound(car2, round_time2, date1);
+		atob.addRound(car1, round_time3, date2);
+		atob.addRound(car2, round_time4, date2);
+		
+		atob.sortRounds();
+		assertTrue(len atob.round = 4);
+		assertTrue(round1.isequal(atob.round(2)));
+		assertTrue(round2.isequal(atob.round(4)));
+		assertTrue(round3.isequal(atob.round(3)));
+		assertTrue(round4.isequal(atob.round(1)));
+		
+	);
 end AtoBTest
