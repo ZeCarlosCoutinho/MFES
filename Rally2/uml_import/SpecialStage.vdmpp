@@ -11,9 +11,34 @@ operations
     );
     
 
-  public  getResults : ()  ==> StageResult
+  public  getResults : ()  ==> seq of (StageResult)
   getResults() ==
-    is not yet specified;
+    (
+    dcl results:Stage := new Stage();
+    results.stage_results := [];
+    
+    for all team in set teams do
+    (
+    	for all car in set team.cars do
+    	(
+    		dcl stage_result:StageResult := new StageResult(car, 0);
+    		results.stage_results := results.stage_results ^ [stage_result];
+    	);
+    );
+    
+    for all stage in set stages do
+    (
+    	for n = 1 to len stage.stage_results do
+    	(
+    		dcl res:StageResult := results.getStageResult(stage.stage_results(n).car.number);
+    		res.stage_time := res.stage_time + stage.stage_results(n).stage_time;
+    	);
+    );
+    
+    results.sortResults();
+   	
+    return results.stage_results;
+    );
 
   public  SpecialStage : seq of (char) * seq of (char) * Date * Date ==> SpecialStage
   SpecialStage(nm, loc, bg_date, e_date) ==
