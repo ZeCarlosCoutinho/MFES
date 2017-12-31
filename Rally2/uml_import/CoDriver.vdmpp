@@ -5,6 +5,8 @@ operations
     (
     nationality := nati;
     name := nm;
+    
+    return self;
     )
 
 end CoDriver

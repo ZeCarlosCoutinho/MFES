@@ -2,10 +2,12 @@ class Date
 types
 	public CalendarDate ::	year : nat
 													month : nat
-													day : nat;
+													day : nat
+					inv cd == cd.month <= 12 and cd.day <= 31;
 	public TimeStamp ::	hours : nat
 											minutes : nat
-											seconds : nat;
+											seconds : nat
+					inv ts == ts.hours <= 23 and ts.minutes <= 59 and ts.seconds <= 59;
 instance variables
 	calendardate : CalendarDate := mk_CalendarDate(0, 0, 0);
 	timestamp : TimeStamp := mk_TimeStamp(0, 0, 0);

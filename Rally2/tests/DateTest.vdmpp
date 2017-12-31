@@ -1,0 +1,22 @@
+class DateTest is subclass of TestCase
+
+operations
+	private testIsEqual: () ==> ()
+	testIsEqual() ==
+	(
+		dcl year : nat := 2007;
+		dcl month : nat := 11;
+		dcl day : nat := 21;
+		dcl hours : nat := 17;
+		dcl minutes : nat := 40;
+		dcl seconds : nat := 30;
+		
+		dcl date1 : Date := new Date(year, month, day, hours, minutes, seconds);
+		dcl date2 : Date := new Date(year, month, day, hours, minutes, seconds);
+		dcl date3 : Date := new Date(year, month, day, hours, 0, 0);
+		
+		assertTrue(date1.isequal(date2));
+		assertFalse(date1.isequal(date3));
+		
+	);
+end DateTest
