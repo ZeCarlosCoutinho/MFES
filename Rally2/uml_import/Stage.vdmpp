@@ -25,7 +25,10 @@ operations
     dcl result:StageResult := new StageResult(c, s_t);
     stage_results := stage_results ^ [result];
     )
-    pre s_t > 0 and c.team in set event.teams and getStageResult(c.number) = nil
+    pre 
+    	s_t > 0 
+    	and c.team in set event.teams 
+    	and getStageResult(c.number) = nil
     post getStageResult(c.number) <> nil;
 
   public  sortResults : ()  ==> ()
