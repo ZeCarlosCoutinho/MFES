@@ -1,9 +1,98 @@
 class SpecialStageTest is subclass of TestCase
 
 operations
+private testGetStage: () ==> ()
+	testGetStage() ==
+	(
+		dcl manager:Manager := new Manager("Malcom Wilson", "British");
+		dcl manager2:Manager := new Manager("Tommi Mäkinen", "Finish");
+		
+		dcl team:Team := new Team("M-Sport", manager);
+		dcl team2:Team := new Team("TOYOTA GAZOO RACING WRT", manager2);
+		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", new Date(), new Date());
+		
+		dcl stage1 : Stage := new Stage("SS1 LOUSADA", 3360, 1, new Date(), event);
+		dcl stage2 : Stage := new Stage("SS2 VIANA DO CASTELO 1", 26700, 2, new Date(), event);
+		dcl stage3 : Stage := new Stage("SS3 CAMINHA 1", 18100, 3, new Date(), event);
+		
+		dcl car1 : Car := new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team, 1);
+		dcl car2 : Car := new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team, 2);
+		dcl car3 : Car := new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 10);
+		dcl car4 : Car := new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 11);
+		
+		event.stages := {stage1, stage2, stage3};
+		team.cars := {car1, car2};
+		team2.cars := {car3, car4};
+		event.teams := {team, team2};
+		team.events := {event};
+		team2.events := {event};
+		
+		assertTrue(event.getStage(1).number = 1 and event.getStage(1).distance = 3360 and event.getStage(1).name = "SS1 LOUSADA");
+		assertTrue(event.getStage(2).number = 2 and event.getStage(2).distance = 26700 and event.getStage(2).name = "SS2 VIANA DO CASTELO 1");
+		assertTrue(event.getStage(3).number = 3 and event.getStage(3).distance = 18100 and event.getStage(3).name = "SS3 CAMINHA 1");
+	);
+	
+	
 private testStageSort: () ==> ()
 	testStageSort() ==
 	(
+		dcl manager:Manager := new Manager("Malcom Wilson", "British");
+		dcl manager2:Manager := new Manager("Tommi Mäkinen", "Finish");
+		
+		dcl team:Team := new Team("M-Sport", manager);
+		dcl team2:Team := new Team("TOYOTA GAZOO RACING WRT", manager2);
+		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", new Date(), new Date());
+		
+		dcl stage1 : Stage := new Stage("SS1 LOUSADA", 3360, 1, new Date(), event);
+		dcl stage2 : Stage := new Stage("SS2 VIANA DO CASTELO 1", 26700, 2, new Date(), event);
+		dcl stage3 : Stage := new Stage("SS3 CAMINHA 1", 18100, 3, new Date(), event);
+		
+		dcl car1 : Car := new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team, 1);
+		dcl car2 : Car := new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team, 2);
+		dcl car3 : Car := new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 10);
+		dcl car4 : Car := new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 11);
+		
+		dcl stageResult1 : StageResult := new StageResult(car1, 157300);
+		dcl stageResult2 : StageResult := new StageResult(car2, 147200);
+		dcl stageResult3 : StageResult := new StageResult(car3, 145800);
+		dcl stageResult4 : StageResult := new StageResult(car4, 115400);
+		
+		dcl stageResult5 : StageResult := new StageResult(car1, 939922);
+		dcl stageResult6 : StageResult := new StageResult(car2, 929227);
+		dcl stageResult7 : StageResult := new StageResult(car3, 941544);
+		dcl stageResult8 : StageResult := new StageResult(car4, 940578);
+		
+		dcl stageResult9 : StageResult := new StageResult(car1, 643099);
+		dcl stageResult10 : StageResult := new StageResult(car2, 645199);
+		dcl stageResult11 : StageResult := new StageResult(car3, 658434);
+		dcl stageResult12 : StageResult := new StageResult(car4, 637224);
+		
+		
+		event.stages := {stage1, stage2, stage3};
+		team.cars := {car1, car2};
+		team2.cars := {car3, car4};
+		event.teams := {team, team2};
+		team.events := {event};
+		team2.events := {event};
+		
+		stage1.stage_results := [stageResult1, stageResult2, stageResult3, stageResult4];
+		stage2.stage_results := [stageResult5, stageResult6, stageResult7, stageResult8];
+		stage3.stage_results := [stageResult9, stageResult10, stageResult11, stageResult12];
+		
+		for all stage in set event.stages do
+		(
+			stage.sortResults();
+			for sr = 1 to len stage.stage_results - 1 do
+			(
+			assertTrue(stage.stage_results(sr).stage_time < stage.stage_results(sr + 1).stage_time);
+			);
+		);
+
+	);
+	
+private testGetResults: () ==> ()
+testGetResults() ==
+(
 		dcl manager:Manager := new Manager("Malcom Wilson", "British");
 		dcl manager2:Manager := new Manager("Tommi Mäkinen", "Finish");
 		
@@ -15,46 +104,41 @@ private testStageSort: () ==> ()
 		dcl results_answers_times : seq of (int) := [1693202, 1721626, 1740321, 1745778];
 		dcl results_answers_pos : seq of (int) := [11, 2, 1, 10];
 		
-		event.addStage("SS1 LOUSADA", 1, 3360, new Date());
-		event.addStage("SS2 VIANA DO CASTELO 1", 2, 26700, new Date());
-		event.addStage("SS3 CAMINHA 1", 3, 18100, new Date());
+		dcl stage1 : Stage := new Stage("SS1 LOUSADA", 3360, 1, new Date(), event);
+		dcl stage2 : Stage := new Stage("SS2 VIANA DO CASTELO 1", 26700, 2, new Date(), event);
+		dcl stage3 : Stage := new Stage("SS3 CAMINHA 1", 18100, 3, new Date(), event);
 		
-		team.addCar("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, 1);
-		team.addCar("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, 2);
+		dcl car1 : Car := new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team, 1);
+		dcl car2 : Car := new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team, 2);
+		dcl car3 : Car := new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 10);
+		dcl car4 : Car := new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 11);
 		
-		team2.addCar("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, 10);
-		team2.addCar("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, 11);
+		dcl stageResult1 : StageResult := new StageResult(car1, 157300);
+		dcl stageResult2 : StageResult := new StageResult(car2, 147200);
+		dcl stageResult3 : StageResult := new StageResult(car3, 145800);
+		dcl stageResult4 : StageResult := new StageResult(car4, 115400);
 		
-		event.addTeam(team);
-		event.addTeam(team2);
+		dcl stageResult5 : StageResult := new StageResult(car1, 939922);
+		dcl stageResult6 : StageResult := new StageResult(car2, 929227);
+		dcl stageResult7 : StageResult := new StageResult(car3, 941544);
+		dcl stageResult8 : StageResult := new StageResult(car4, 940578);
 		
-		assertTrue(event.getStage(1).number = 1 and event.getStage(1).distance = 3360 and event.getStage(1).name = "SS1 LOUSADA");
-		assertTrue(event.getStage(2).number = 2 and event.getStage(2).distance = 26700 and event.getStage(2).name = "SS2 VIANA DO CASTELO 1");
-		assertTrue(event.getStage(3).number = 3 and event.getStage(3).distance = 18100 and event.getStage(3).name = "SS3 CAMINHA 1");
+		dcl stageResult9 : StageResult := new StageResult(car1, 643099);
+		dcl stageResult10 : StageResult := new StageResult(car2, 645199);
+		dcl stageResult11 : StageResult := new StageResult(car3, 658434);
+		dcl stageResult12 : StageResult := new StageResult(car4, 637224);
 		
-		event.getStage(1).addStageResult(team.getCar(1), 157300);
-		event.getStage(1).addStageResult(team.getCar(2), 147200);
-		event.getStage(1).addStageResult(team2.getCar(10), 145800);
-		event.getStage(1).addStageResult(team2.getCar(11), 115400);
 		
-		event.getStage(2).addStageResult(team.getCar(1), 939922);
-		event.getStage(2).addStageResult(team.getCar(2), 929227);
-		event.getStage(2).addStageResult(team2.getCar(10), 941544);
-		event.getStage(2).addStageResult(team2.getCar(11), 940578);
+		event.stages := {stage1, stage2, stage3};
+		team.cars := {car1, car2};
+		team2.cars := {car3, car4};
+		event.teams := {team, team2};
+		team.events := {event};
+		team2.events := {event};
 		
-		event.getStage(3).addStageResult(team.getCar(1), 643099);
-		event.getStage(3).addStageResult(team.getCar(2), 645199);
-		event.getStage(3).addStageResult(team2.getCar(10), 658434);
-		event.getStage(3).addStageResult(team2.getCar(11), 637224);
-		
-		for all stage in set event.stages do
-		(
-			stage.sortResults();
-			for sr = 1 to len stage.stage_results - 1 do
-			(
-			assertTrue(stage.stage_results(sr).stage_time < stage.stage_results(sr + 1).stage_time);
-			);
-		);
+		stage1.stage_results := [stageResult1, stageResult2, stageResult3, stageResult4];
+		stage2.stage_results := [stageResult5, stageResult6, stageResult7, stageResult8];
+		stage3.stage_results := [stageResult9, stageResult10, stageResult11, stageResult12];
 		
 		results := event.getResults().stage_results;
 		for n = 1 to len results do
@@ -62,7 +146,26 @@ private testStageSort: () ==> ()
 			assertTrue(results(n).car.number = results_answers_pos(n));
 			assertTrue(results(n).stage_time = results_answers_times(n));
 		);
+);
 
-	);
+private testAddStage: () ==> ()
+testAddStage() ==
+(
+		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", new Date(), new Date());
+		
+		dcl name1 : seq of char := "SS1 LOUSADA";
+		dcl name2 : seq of char := "SS2 VIANA DO CASTELO 1";
+		dcl distance1 : int := 3360;
+		dcl distance2 : int := 26700;
+		dcl stage1 : Stage := new Stage(name1, distance1, 1, new Date(), event);
+		dcl stage2 : Stage := new Stage(name2, distance2, 2, new Date(), event);
+		
+		--TODO verificar se as stages que estao la efetivamente sao as corretas
+		event.addStage(name1, 1, distance1, new Date());
+		assertTrue(card event.stages = 1);
+		event.addStage(name2, 2, distance2, new Date());
+		assertTrue(card event.stages = 2);
+		
+);
 
 end SpecialStageTest
