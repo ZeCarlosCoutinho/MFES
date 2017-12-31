@@ -11,7 +11,7 @@ operations
     );
     
 
-  public  getResults : ()  ==> seq of (StageResult)
+  public  getResults : ()  ==> Stage
   getResults() ==
     (
     dcl results:Stage := new Stage();
@@ -37,7 +37,7 @@ operations
     
     results.sortResults();
    	
-    return results.stage_results;
+    return results;
     );
 
   public  SpecialStage : seq of (char) * seq of (char) * Date * Date ==> SpecialStage

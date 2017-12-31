@@ -10,7 +10,8 @@ operations
   public  addTeam : Team ==> ()
   addTeam(team) ==
     (
-    teams := teams union {team}
+    teams := teams union {team};
+    team.addEvent(self);
     )
     pre team not in set teams
     post team in set teams;

@@ -1,0 +1,68 @@
+class SpecialStageTest is subclass of TestCase
+
+operations
+private testStageSort: () ==> ()
+	testStageSort() ==
+	(
+		dcl manager:Manager := new Manager("Malcom Wilson", "British");
+		dcl manager2:Manager := new Manager("Tommi Mäkinen", "Finish");
+		
+		dcl team:Team := new Team("M-Sport", manager);
+		dcl team2:Team := new Team("TOYOTA GAZOO RACING WRT", manager2);
+		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", new Date(), new Date());
+		
+		dcl results : seq of (StageResult);
+		dcl results_answers_times : seq of (int) := [1693202, 1721626, 1740321, 1745778];
+		dcl results_answers_pos : seq of (int) := [11, 2, 1, 10];
+		
+		event.addStage("SS1 LOUSADA", 1, 3360, new Date());
+		event.addStage("SS2 VIANA DO CASTELO 1", 2, 26700, new Date());
+		event.addStage("SS3 CAMINHA 1", 3, 18100, new Date());
+		
+		team.addCar("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, 1);
+		team.addCar("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, 2);
+		
+		team2.addCar("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, 10);
+		team2.addCar("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, 11);
+		
+		event.addTeam(team);
+		event.addTeam(team2);
+		
+		assertTrue(event.getStage(1).number = 1 and event.getStage(1).distance = 3360 and event.getStage(1).name = "SS1 LOUSADA");
+		assertTrue(event.getStage(2).number = 2 and event.getStage(2).distance = 26700 and event.getStage(2).name = "SS2 VIANA DO CASTELO 1");
+		assertTrue(event.getStage(3).number = 3 and event.getStage(3).distance = 18100 and event.getStage(3).name = "SS3 CAMINHA 1");
+		
+		event.getStage(1).addStageResult(team.getCar(1), 157300);
+		event.getStage(1).addStageResult(team.getCar(2), 147200);
+		event.getStage(1).addStageResult(team2.getCar(10), 145800);
+		event.getStage(1).addStageResult(team2.getCar(11), 115400);
+		
+		event.getStage(2).addStageResult(team.getCar(1), 939922);
+		event.getStage(2).addStageResult(team.getCar(2), 929227);
+		event.getStage(2).addStageResult(team2.getCar(10), 941544);
+		event.getStage(2).addStageResult(team2.getCar(11), 940578);
+		
+		event.getStage(3).addStageResult(team.getCar(1), 643099);
+		event.getStage(3).addStageResult(team.getCar(2), 645199);
+		event.getStage(3).addStageResult(team2.getCar(10), 658434);
+		event.getStage(3).addStageResult(team2.getCar(11), 637224);
+		
+		for all stage in set event.stages do
+		(
+			stage.sortResults();
+			for sr = 1 to len stage.stage_results - 1 do
+			(
+			assertTrue(stage.stage_results(sr).stage_time < stage.stage_results(sr + 1).stage_time);
+			);
+		);
+		
+		results := event.getResults().stage_results;
+		for n = 1 to len results do
+		(	
+			assertTrue(results(n).car.number = results_answers_pos(n));
+			assertTrue(results(n).stage_time = results_answers_times(n));
+		);
+
+	);
+
+end SpecialStageTest
