@@ -129,32 +129,36 @@ private testTeamResults: () ==> ()
 		assertTrue(team2_results(3).car.number = 10 and team2_results(3).event.name = "Vodafone Rally de Portugal" and team2_results(3).position = 4);
 		assertTrue(team2_results(4).car.number = 11 and team2_results(4).event.name = "Vodafone Rally de Portugal" and team2_results(4).position = 1);
 		
-		/*
-		IO`println("Team 1");
-		for all cr in set elems team_results do
-		(
-		IO`print(cr.car.number);
-		IO`print("  ");
-		IO`print(cr.event.name);
-		IO`print("  ");
-		IO`print(cr.position);
-		IO`println("");
-		);
-		
-		IO`println("");
-		IO`println("Team 2");
-		for all cr in set elems team2_results do
-		(
-		IO`print(cr.car.number);
-		IO`print("  ");
-		IO`print(cr.event.name);
-		IO`print("  ");
-		IO`print(cr.position);
-		IO`println("");
-		)
-		*/
-		
 	);
 	
+private testGetCar: () ==> ()
+	testGetCar() ==
+	(
+		dcl manager:Manager := new Manager("Malcom Wilson", "British");
+		dcl team:Team := new Team("M-Sport", manager);
+		
+		team.addCar("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, 1);
+		team.addCar("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, 2);
+		
+		assertTrue(team.getCar(2).make = "Ford" and team.getCar(2).model = "Fiesta WRC" and team.getCar(2).year = 2017 and team.getCar(2).bhp = 380 and  team.getCar(2).weight = 1190 and team.getCar(2).traction = "4WD" and team.getCar(2).team = team and team.getCar(2).number = 2); 
+		assertTrue(team.getCar(1).make = "Ford" and team.getCar(1).model = "Fiesta WRC" and team.getCar(1).year = 2017 and team.getCar(1).bhp = 380 and  team.getCar(1).weight = 1190 and team.getCar(1).traction = "4WD" and team.getCar(1).team = team and team.getCar(1).number = 1); 
+		assertTrue(team.getCar(3) = nil);
+	);
+	
+private testGetMember: () ==> ()
+	testGetMember() ==
+	(
+		dcl manager:Manager := new Manager("Malcom Wilson", "British");
+		dcl team:Team := new Team("M-Sport", manager);
+		
+		team.addDriver("Sébastien Ogier", "French");
+		team.addCoDriver("Julien Ingrassia", "French");
+		team.addMechanic("Felipe Warner", "Brazilian");
+		
+		assertTrue(team.getMember("Sébastien Ogier").name = "Sébastien Ogier" and team.getMember("Sébastien Ogier").nationality = "French");
+		assertTrue(team.getMember("Julien Ingrassia").name = "Julien Ingrassia" and team.getMember("Julien Ingrassia").nationality = "French");
+		assertTrue(team.getMember("Felipe Warner").name = "Felipe Warner" and team.getMember("Felipe Warner").nationality = "Brazilian");
+		assertTrue(team.getMember("Reiner Buchwalds") = nil);
+	);
 
 end TeamTest

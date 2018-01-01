@@ -51,7 +51,7 @@ operations
   	dcl result : seq of Round := [];
   	dcl not_in_results : bool := true;
   
-  	self.sortRounds();
+  	sortRounds();
   	for n = 1 to len round do
   	(
   		not_in_results := true;
@@ -78,13 +78,13 @@ operations
   	return self;
    );
    
-   public pure getRound : [Car] * [Date] ==> Round
+   public pure getRound : [Car] * [Date] ==> [Round]
    getRound(car, date) ==
    (
    	 for all rnd in set elems round do
    	 	if rnd.car = car and rnd.date = date
    	 	then return rnd;
-   	 return undefined; --When no Round is found
+   	 return nil; --When no Round is found
    )
    pre car <> nil and date <> nil;
    

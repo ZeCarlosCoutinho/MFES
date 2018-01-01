@@ -30,6 +30,7 @@ private testGetStage: () ==> ()
 		assertTrue(event.getStage(1).number = 1 and event.getStage(1).distance = 3360 and event.getStage(1).name = "SS1 LOUSADA");
 		assertTrue(event.getStage(2).number = 2 and event.getStage(2).distance = 26700 and event.getStage(2).name = "SS2 VIANA DO CASTELO 1");
 		assertTrue(event.getStage(3).number = 3 and event.getStage(3).distance = 18100 and event.getStage(3).name = "SS3 CAMINHA 1");
+		assertTrue(event.getStage(10) = nil);
 	);
 	
 	
