@@ -1,7 +1,7 @@
 class TeamTest is subclass of TestCase
 
 operations
-private testTeam: () ==> ()
+public testTeam: () ==> ()
 	testTeam() ==
 	(
 		dcl manager:Manager := new Manager("Malcom Wilson", "British");
@@ -55,7 +55,7 @@ private testTeam: () ==> ()
 		assertTrue(team.getMember("") = nil);
 	);
 	
-private testTeamResults: () ==> ()
+public testTeamResults: () ==> ()
 	testTeamResults() ==
 	(
 		dcl manager:Manager := new Manager("Malcom Wilson", "British");
@@ -80,10 +80,10 @@ private testTeamResults: () ==> ()
 		event.addStage("SS2 VIANA DO CASTELO 1", 2, 26700, new Date());
 		event.addStage("SS3 CAMINHA 1", 3, 18100, new Date());
 		
-		event.addTeam(team);
-		event.addTeam(team2);
 		event2.addTeam(team);
 		event2.addTeam(team2);
+		event.addTeam(team);
+		event.addTeam(team2);
 		
 		event.getStage(1).addStageResult(team.getCar(1), 157300);
 		event.getStage(1).addStageResult(team.getCar(2), 147200);
@@ -131,7 +131,7 @@ private testTeamResults: () ==> ()
 		
 	);
 	
-private testGetCar: () ==> ()
+public testGetCar: () ==> ()
 	testGetCar() ==
 	(
 		dcl manager:Manager := new Manager("Malcom Wilson", "British");
@@ -145,7 +145,7 @@ private testGetCar: () ==> ()
 		assertTrue(team.getCar(3) = nil);
 	);
 	
-private testGetMember: () ==> ()
+public testGetMember: () ==> ()
 	testGetMember() ==
 	(
 		dcl manager:Manager := new Manager("Malcom Wilson", "British");

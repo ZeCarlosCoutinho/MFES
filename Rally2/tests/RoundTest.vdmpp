@@ -1,7 +1,7 @@
 class RoundTest is subclass of TestCase
 
 operations
-	private testRoundCreation: () ==> ()
+	public testRoundCreation: () ==> ()
 	testRoundCreation() ==
 	(
 		dcl manager : Manager := new Manager("Ezio Auditore", "Italian");
@@ -16,7 +16,7 @@ operations
 		assertTrue(round.round_time = round_time);
 	);
 	
-	private testIsEqual: () ==> ()
+	public testIsEqual: () ==> ()
 	testIsEqual() ==
 	(
 		dcl manager1 : Manager := new Manager("Ezio Auditore", "Italian");

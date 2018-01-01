@@ -1,7 +1,7 @@
 class SpecialStageTest is subclass of TestCase
 
 operations
-private testGetStage: () ==> ()
+public testGetStage: () ==> ()
 	testGetStage() ==
 	(
 		dcl manager:Manager := new Manager("Malcom Wilson", "British");
@@ -34,7 +34,7 @@ private testGetStage: () ==> ()
 	);
 	
 	
-private testStageSort: () ==> ()
+public testStageSort: () ==> ()
 	testStageSort() ==
 	(
 		dcl manager:Manager := new Manager("Malcom Wilson", "British");
@@ -91,7 +91,7 @@ private testStageSort: () ==> ()
 
 	);
 	
-private testGetResults: () ==> ()
+public testGetResults: () ==> ()
 testGetResults() ==
 (
 		dcl manager:Manager := new Manager("Malcom Wilson", "British");
@@ -149,7 +149,7 @@ testGetResults() ==
 		);
 );
 
-private testAddStage: () ==> ()
+public testAddStage: () ==> ()
 testAddStage() ==
 (
 		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", new Date(), new Date());

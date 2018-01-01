@@ -2,7 +2,7 @@ class StageTest is subclass of TestCase
 
 operations
 
-private testStage: () ==> ()
+public testStage: () ==> ()
 	testStage() ==
 	(
 		dcl date1 : Date := new Date(2017, 5, 18, 9, 0, 0);
@@ -15,7 +15,7 @@ private testStage: () ==> ()
 		assertTrue(stage.name = "SS1 LOUSADA" and stage.distance = 3360 and stage.date = date3 and stage.event = event);
 	);
 	
-private testAddStageResult: () ==> ()
+public testAddStageResult: () ==> ()
 	testAddStageResult() ==
 	(
 		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", new Date(), new Date());
@@ -44,7 +44,7 @@ private testAddStageResult: () ==> ()
 		
 	);
 	
-private testSortStageResults: () ==> ()
+public testSortStageResults: () ==> ()
 	testSortStageResults() ==
 	(
 		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", new Date(), new Date());
@@ -75,7 +75,7 @@ private testSortStageResults: () ==> ()
 		
 	);
 	
-private testGetStageResult: () ==> ()
+public testGetStageResult: () ==> ()
 	testGetStageResult() ==
 	(
 		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", new Date(), new Date());

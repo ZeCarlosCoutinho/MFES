@@ -125,6 +125,8 @@ operations
 	    );
 	    return ret_seq;
     );
+    --pre true
+    --post len RESULT <= card events * card cars;
 
   public pure  getCar : int ==> [Car]
   getCar(n) ==

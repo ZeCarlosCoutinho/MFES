@@ -1,6 +1,6 @@
 class AtoBTest is subclass of TestCase
 operations
-	private testAddRound: () ==> ()
+	public testAddRound: () ==> ()
 	testAddRound() ==
 	(
 		dcl date : Date := new Date(2017, 12, 28, 19, 30, 00);
@@ -17,7 +17,7 @@ operations
 		assertTrue(round.isequal(atob.round(1)));
 	);
 	
-	private testGetCarRounds: () ==> ()
+	public testGetCarRounds: () ==> ()
 	testGetCarRounds() ==
 	(
 		dcl date1 : Date := new Date(2017, 12, 28, 19, 30, 00);
@@ -46,7 +46,7 @@ operations
 	);
 	
 	-- TODO: Insert the rounds manually. If addRound fails, this test fails too
-	private testSortRounds: () ==> ()
+	public testSortRounds: () ==> ()
 	testSortRounds()==
 	(
 		dcl date1 : Date := new Date(2017, 12, 28, 19, 30, 00);
@@ -81,7 +81,7 @@ operations
 		
 	);
 	
-	private testGetFinalRounds: () ==> ()
+	public testGetFinalRounds: () ==> ()
 	testGetFinalRounds() ==
 	(
 		dcl date1 : Date := new Date(2017, 12, 28, 19, 30, 00);
@@ -119,7 +119,7 @@ operations
 		assertTrue(results(3) = round3);
 	);
 	
-	private testGetRound: () ==> ()
+	public testGetRound: () ==> ()
 	testGetRound() ==
 	(
 		dcl date1 : Date := new Date(2017, 12, 28, 19, 30, 00);
@@ -143,10 +143,8 @@ operations
 		
 		dcl round_time1 : int := 6600;
 		dcl round_time2: int := 7000;
-		dcl round_time3: int := 6650;
 		dcl round_time4: int := 5505;
 		dcl round_time5: int := 4500;
-		dcl round_time6: int := 6690;
 		
 		dcl atob : AtoB := new AtoB("Super Mario Mountain Climb", "Italy", date1, end_date);
 		dcl round1 : Round := new Round(round_time1, date1, car1);

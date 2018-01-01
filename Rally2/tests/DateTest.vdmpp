@@ -1,7 +1,7 @@
 class DateTest is subclass of TestCase
 
 operations
-	private testIsEqual: () ==> ()
+	public testIsEqual: () ==> ()
 	testIsEqual() ==
 	(
 		dcl year : nat := 2007;
@@ -20,7 +20,7 @@ operations
 		
 	);
 	
-	private testIsBefore: () ==> ()
+	public testIsBefore: () ==> ()
 	testIsBefore() ==
 	(
 		dcl date1 : Date := new Date(2011, 11, 11, 11, 11, 11);
