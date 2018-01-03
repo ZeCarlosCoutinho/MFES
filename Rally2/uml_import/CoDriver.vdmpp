@@ -5,7 +5,7 @@ operations
     (
     nationality := nati;
     name := nm;
-    
+    team := nil;
     return self;
     )
 

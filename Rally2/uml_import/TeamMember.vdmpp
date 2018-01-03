@@ -2,5 +2,6 @@ class TeamMember
 instance variables
   public name:seq of (char);
   public nationality:seq of (char);
+  public team: [Team];
 
 end TeamMember

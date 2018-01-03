@@ -5,6 +5,7 @@ operations
     (
     name := nm;
     nationality := nati;
+    team := nil;
     )
 
 end Mechanic

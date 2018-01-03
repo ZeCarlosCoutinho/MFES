@@ -1,18 +1,10 @@
 class Testing
-types
--- TODO Define types here
-values
--- TODO Define values here
-instance variables
--- TODO Define instance variables here
+
 operations
 	public static main: () ==> ()
 	main() ==
 	(
 		new TestRunner().run()
 	);
-functions
--- TODO Define functiones here
-traces
--- TODO Define Combinatorial Test Traces here
+
 end Testing

@@ -76,7 +76,8 @@ operations
   	location := loc;
   	round := [];
   	return self;
-   );
+   )
+   pre beginning_d.isbefore(end_d);
    
    public pure getRound : [Car] * [Date] ==> [Round]
    getRound(car, date) ==
