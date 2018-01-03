@@ -5,7 +5,7 @@ operations
     (
     nationality := nati;
     name := nm;
-    team := nil; --TODO Add to UML
+    team := nil;
     return self;
     )
 

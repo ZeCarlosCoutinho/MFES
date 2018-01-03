@@ -35,7 +35,6 @@ operations
   	timestamp.seconds := scnds;
   );
   
-  -- TODO : Add to Model
   public pure isequal : [Date] ==> bool
   isequal(dt) ==
   (
