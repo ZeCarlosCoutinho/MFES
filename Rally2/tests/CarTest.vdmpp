@@ -1,6 +1,6 @@
 class CarTest is subclass of TestCase
 operations
-	private testSetDriver: () ==> ()
+	public testSetDriver: () ==> ()
 	testSetDriver() ==
 	(
 		dcl driver1 : Driver := new Driver("Leonardo DiCaprio", "American");
@@ -15,7 +15,7 @@ operations
 		assertTrue(car.driver = driver2);
 	);
 	
-	private testSetCoDriver: () ==> ()
+	public testSetCoDriver: () ==> ()
 	testSetCoDriver() ==
 	(
 		dcl manager : Manager := new Manager("Ezio Auditore", "Italian");
@@ -32,7 +32,7 @@ operations
 		
 	);
 	
-	private testAddMechanic : () ==> ()
+	public testAddMechanic : () ==> ()
 	testAddMechanic() ==
 	(
 		dcl manager : Manager := new Manager("Ezio Auditore", "Italian");

@@ -1,0 +1,106 @@
+class StageTest is subclass of TestCase
+
+operations
+
+public testStage: () ==> ()
+	testStage() ==
+	(
+		dcl date1 : Date := new Date(2017, 5, 18, 9, 0, 0);
+		dcl date2 : Date := new Date(2017, 5, 21, 18, 0, 0);
+		dcl date3 : Date := new Date(2017, 5, 18, 12, 10, 0);
+		
+		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", date1, date2);
+		dcl stage:Stage := new Stage("SS1 LOUSADA", 3360, 1, date3, event);
+		
+		assertTrue(stage.name = "SS1 LOUSADA" and stage.distance = 3360 and stage.date = date3 and stage.event = event);
+	);
+	
+public testAddStageResult: () ==> ()
+	testAddStageResult() ==
+	(
+		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", new Date(), new Date());
+		dcl stage:Stage := new Stage("SS1 LOUSADA", 3360, 1, new Date(), event);
+		
+		dcl team1:Team := new Team("M-Sport", new Manager());
+		dcl team2:Team := new Team("TOYOTA GAZOO RACING WRT", new Manager());
+		
+		dcl car1 : Car := new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team1, 1);
+		dcl car2 : Car := new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team1, 2);
+		dcl car3 : Car := new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 10);
+		dcl car4 : Car := new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 11);
+		
+		event.addTeam(team1);
+		event.addTeam(team2);
+		
+		stage.addStageResult(car1, 500);
+		stage.addStageResult(car2, 526);
+		stage.addStageResult(car3, 517);
+		stage.addStageResult(car4, 498);
+		
+		assertTrue(stage.stage_results(1).car = car1 and stage.stage_results(1).stage_time = 500);
+		assertTrue(stage.stage_results(2).car = car2 and stage.stage_results(2).stage_time = 526);
+		assertTrue(stage.stage_results(3).car = car3 and stage.stage_results(3).stage_time = 517);
+		assertTrue(stage.stage_results(4).car = car4 and stage.stage_results(4).stage_time = 498);
+		
+	);
+	
+public testSortStageResults: () ==> ()
+	testSortStageResults() ==
+	(
+		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", new Date(), new Date());
+		dcl stage:Stage := new Stage("SS1 LOUSADA", 3360, 1, new Date(), event);
+		
+		dcl team1:Team := new Team("M-Sport", new Manager());
+		dcl team2:Team := new Team("TOYOTA GAZOO RACING WRT", new Manager());
+		
+		dcl car1 : Car := new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team1, 1);
+		dcl car2 : Car := new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team1, 2);
+		dcl car3 : Car := new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 10);
+		dcl car4 : Car := new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 11);
+		
+		event.addTeam(team1);
+		event.addTeam(team2);
+		
+		stage.addStageResult(car1, 500);
+		stage.addStageResult(car2, 526);
+		stage.addStageResult(car3, 517);
+		stage.addStageResult(car4, 498);
+		
+		stage.sortResults();
+		
+		assertTrue(stage.stage_results(1).car = car4 and stage.stage_results(1).stage_time = 498);
+		assertTrue(stage.stage_results(2).car = car1 and stage.stage_results(2).stage_time = 500);
+		assertTrue(stage.stage_results(3).car = car3 and stage.stage_results(3).stage_time = 517);
+		assertTrue(stage.stage_results(4).car = car2 and stage.stage_results(4).stage_time = 526);
+		
+	);
+	
+public testGetStageResult: () ==> ()
+	testGetStageResult() ==
+	(
+		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", new Date(), new Date());
+		dcl stage:Stage := new Stage("SS1 LOUSADA", 3360, 1, new Date(), event);
+		
+		dcl team1:Team := new Team("M-Sport", new Manager());
+		dcl team2:Team := new Team("TOYOTA GAZOO RACING WRT", new Manager());
+		
+		dcl car1 : Car := new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team1, 1);
+		dcl car2 : Car := new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team1, 2);
+		dcl car3 : Car := new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 10);
+		dcl car4 : Car := new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 11);
+		
+		event.addTeam(team1);
+		event.addTeam(team2);
+		
+		stage.addStageResult(car1, 500);
+		stage.addStageResult(car2, 526);
+		stage.addStageResult(car3, 517);
+		stage.addStageResult(car4, 498);
+		
+		assertTrue(stage.getStageResult(1).stage_time = 500);
+		assertTrue(stage.getStageResult(2).stage_time = 526);
+		assertTrue(stage.getStageResult(10).stage_time = 517);
+		assertTrue(stage.getStageResult(11).stage_time = 498);
+		assertTrue(stage.getStageResult(15) = nil);
+	);
+end StageTest

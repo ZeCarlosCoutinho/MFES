@@ -8,7 +8,10 @@ operations
     (
     dcl stage:Stage := new Stage(nm, distance, number, date, self);
     stages := stages union {stage};
-    );
+    )
+    pre self.beginning_date.isbefore(date) or self.beginning_date.isequal(date)
+    		and date.isbefore(self.end_date) or self.end_date.isequal(date)
+    post getStage(number) <> nil;
     
 
   public  getResults : ()  ==> Stage

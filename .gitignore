@@ -1,2 +1,4 @@
+!Rally2/generated/
 
-Rally2/generated/
+Rally2/generated/*
+!Rally2/generated/java/

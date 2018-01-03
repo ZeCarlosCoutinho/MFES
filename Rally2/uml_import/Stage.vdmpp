@@ -25,7 +25,10 @@ operations
     dcl result:StageResult := new StageResult(c, s_t);
     stage_results := stage_results ^ [result];
     )
-    pre s_t > 0 and c.team in set event.teams and getStageResult(c.number) = nil
+    pre 
+    	s_t > 0 
+    	and c.team in set event.teams 
+    	and getStageResult(c.number) = nil
     post getStageResult(c.number) <> nil;
 
   public  sortResults : ()  ==> ()
@@ -56,14 +59,14 @@ operations
 		SelectionSortResults(i+1)
 	);
 
-functions
-	min_index : seq1 of StageResult -> nat
+
+	min_index : seq1 of StageResult ==> nat
 	min_index(l) ==
 	if len l = 1
-	then 1
+	then return 1
 	else let mi = min_index(tl l)
 	in if l(mi+1).stage_time < l(1).stage_time
-	then mi+1
-	else 1;
+	then return mi+1
+	else return 1;
 
 end Stage

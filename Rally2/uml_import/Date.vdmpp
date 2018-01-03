@@ -25,7 +25,7 @@ operations
   );
   
   -- TODO : Add to Model
-  public isequal : [Date] ==> bool
+  public pure isequal : [Date] ==> bool
   isequal(dt) ==
   (
   	if	self.calendardate.year = dt.calendardate.year and 
@@ -38,5 +38,41 @@ operations
  		else return false; 
   )
   pre dt <> nil;
+  
+  public pure isbefore : [Date] ==> bool
+  isbefore(dt) ==
+  (
+  	if self.calendardate.year < dt.calendardate.year
+  	then return true
+  	else if self.calendardate.year > dt.calendardate.year
+  	then return false;
+  	
+  	if self.calendardate.month < dt.calendardate.month
+  	then return true
+  	else if self.calendardate.month > dt.calendardate.month
+  	then return false;
+  	
+  	if self.calendardate.day < dt.calendardate.day
+  	then return true
+  	else if self.calendardate.day > dt.calendardate.day
+  	then return false;
+  	
+  	if self.timestamp.hours < dt.timestamp.hours
+  	then return true
+  	else if self.timestamp.hours > dt.timestamp.hours
+  	then return false;
+  	
+  	if self.timestamp.minutes < dt.timestamp.minutes
+  	then return true
+  	else if self.timestamp.minutes > dt.timestamp.minutes
+  	then return false;
+  	
+  	if self.timestamp.seconds < dt.timestamp.seconds
+  	then return true
+  	else if self.timestamp.seconds > dt.timestamp.seconds
+  	then return false;
+  	
+  	return false;
+  );
 
 end Date
