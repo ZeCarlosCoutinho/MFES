@@ -27,6 +27,7 @@ public class SpecialStageManagementWindow extends JFrame {
 	private static JList<String> list_stages;
 	private static JList<String> list_teams;
 	private JButton btnAddStage;
+	private JButton btnEventResults;
 
 	/**
 	 * Launch the application.
@@ -105,8 +106,25 @@ public class SpecialStageManagementWindow extends JFrame {
         		});
 			}
 		});
-		btnAddStage.setBounds(131, 403, 89, 23);
+		btnAddStage.setBounds(108, 403, 130, 23);
 		contentPane.add(btnAddStage);
+		
+		btnEventResults = new JButton("Event Results");
+		btnEventResults.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SpecialStageResults ct = new SpecialStageResults(ss);
+				ct.setVisible(true);
+				frame.setEnabled(false);
+        		ct.addWindowListener(new java.awt.event.WindowAdapter() {
+        		    @Override
+        		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+        		        frame.setEnabled(true);
+        		    }
+        		});
+			}
+		});
+		btnEventResults.setBounds(504, 403, 130, 23);
+		contentPane.add(btnEventResults);
 		
 		updateLists();
 	}
