@@ -66,11 +66,13 @@ public class StartWindow {
 		
 		Car car1 = new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team, 1);
 		Car car2 = new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team, 2);
+		Car car6 = new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team, 3);
 		Car car3 = new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 10);
 		Car car4 = new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 11);
+		Car car5 = new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 12);
 		
-		team.cars.addAll(new ArrayList<Car>() {{ add(car1); add(car2);}});
-		team2.cars.addAll(new ArrayList<Car>() {{ add(car3); add(car4);}});
+		team.cars.addAll(new ArrayList<Car>() {{ add(car1); add(car2); add(car6);}});
+		team2.cars.addAll(new ArrayList<Car>() {{ add(car3); add(car4); add(car5);}});
 		
 		teams.add(team);
 		teams.add(team2);

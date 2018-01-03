@@ -61,7 +61,7 @@ public class SpecialStageManagementWindow extends JFrame {
 		        	Rectangle r = list.getCellBounds(0, list.getLastVisibleIndex()); 
 		        	if (r != null && r.contains(evt.getPoint())) { 
 		        		int index = list.locationToIndex(evt.getPoint()); 
-		        		StageManagementWindow tmw = new StageManagementWindow(getStage(list_stages.getModel().getElementAt(index)));
+		        		StageManagementWindow tmw = new StageManagementWindow(getStage(list_stages.getModel().getElementAt(index)), ss);
 		        		tmw.setVisible(true);
 		        		frame.setEnabled(false);
 		        		tmw.addWindowListener(new java.awt.event.WindowAdapter() {
