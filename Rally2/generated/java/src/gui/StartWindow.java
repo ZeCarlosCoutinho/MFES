@@ -107,6 +107,8 @@ public class StartWindow {
 		
 		ss.teams.addAll(new ArrayList<Team>() {{ add(team); add(team2);}});
 		ss.stages.addAll(new ArrayList<Stage>() {{ add(s1); add(s2); add(s3);}});
+		
+		events.add(ss);
 	}
 
 	/**
@@ -138,11 +140,7 @@ public class StartWindow {
 		btnCriarEquipa.setBounds(114, 257, 102, 23);
 		frame.getContentPane().add(btnCriarEquipa);
 		
-		
 		DefaultListModel<String> l1 = new DefaultListModel<>();
-		for(Team t : teams){
-			l1.addElement(t.name);
-		}
 		team_list = new JList<String>(l1);
 		team_list.addMouseListener(new MouseAdapter() {
 		    public void mouseClicked(MouseEvent evt) {
@@ -170,10 +168,7 @@ public class StartWindow {
 		team_listScroller.setBounds(47, 27, 258, 185);
         frame.getContentPane().add(team_listScroller);
 		
-		DefaultListModel<String> l2 = new DefaultListModel<>();  
-		for(Event e : events){
-			l1.addElement(e.name);
-		}
+		DefaultListModel<String> l2 = new DefaultListModel<>();
 		event_list = new JList<String>(l2);
 		event_list.addMouseListener(new MouseAdapter() {
 		    public void mouseClicked(MouseEvent evt) {
@@ -181,8 +176,23 @@ public class StartWindow {
 		        if (evt.getClickCount() == 2) {
 		        	Rectangle r = list.getCellBounds(0, list.getLastVisibleIndex()); 
 		        	if (r != null && r.contains(evt.getPoint())) { 
+		        		JFrame f = null;
 		        		int index = list.locationToIndex(evt.getPoint()); 
-		        		System.out.println(index);
+		        		Event e = getEvent(event_list.getModel().getElementAt(index));
+		        		if(e instanceof SpecialStage)
+		        			f = new SpecialStageManagementWindow((SpecialStage) e);
+		        		if(f != null){
+		        			System.out.println("ola");
+		        			f.setVisible(true);
+			        		frame.setEnabled(false);
+			        		f.addWindowListener(new java.awt.event.WindowAdapter() {
+			        		    @Override
+			        		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+			        		        frame.setEnabled(true);
+			        		    }
+			        		});
+		        		}
+		        			
 		        	}
 		        }
 		    }
@@ -208,6 +218,8 @@ public class StartWindow {
 		});
 		btnCriarEvento.setBounds(456, 257, 102, 23);
 		frame.getContentPane().add(btnCriarEvento);
+		
+		updateLists();
 	}
 	
 	
