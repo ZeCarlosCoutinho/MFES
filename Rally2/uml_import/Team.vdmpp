@@ -64,12 +64,14 @@ operations
     pre cars = {} or getCar(number) = nil
     post getCar(number) in set cars;
     
+  -- TODO Add to UML
   public addCar : Car ==> ()
   addCar(c) ==
   (
 		cars := cars union {c};  
   )
-  pre c not in set cars;
+  pre c not in set cars
+  post c in set cars;
 
   public  assignDriver : [Car] * [Driver] ==> ()
   assignDriver(car, driver) ==

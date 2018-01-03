@@ -26,7 +26,7 @@ operations
 		dcl manager : Manager := new Manager("Ezio Auditore", "Italian");
 		dcl team : Team := new Team("The Creed", manager);
 		dcl car1 : Car := new Car("Ford", "Fiesta", 2002, 500, "4wd", 1000, team, 1);
-		dcl car2 : Car := new Car("Citroen", "Xsara", 2000, 450, "4wd", 1450, team, 1);
+		dcl car2 : Car := new Car("Citroen", "Xsara", 2000, 450, "4wd", 1450, team, 2);
 		dcl round_time1 : int := 6600;
 		dcl round_time2: int := 7000;
 		dcl round_time3: int := 6650;
@@ -55,7 +55,7 @@ operations
 		dcl manager : Manager := new Manager("Ezio Auditore", "Italian");
 		dcl team : Team := new Team("The Creed", manager);
 		dcl car1 : Car := new Car("Ford", "Fiesta", 2002, 500, "4wd", 1000, team, 1);
-		dcl car2 : Car := new Car("Citroen", "Xsara", 2000, 450, "4wd", 1450, team, 1);
+		dcl car2 : Car := new Car("Citroen", "Xsara", 2000, 450, "4wd", 1450, team, 2);
 		dcl round_time1 : int := 6600;
 		dcl round_time2: int := 7000;
 		dcl round_time3: int := 6650;
