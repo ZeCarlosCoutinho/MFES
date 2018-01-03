@@ -82,6 +82,8 @@ operations
 		atob.addRound(car1, round_time3, date2);
 		atob.addRound(car2, round_time4, date2);
 		
+		assertFalse(atob.checkSort());
+		
 		atob.sortRounds();
 		assertTrue(len atob.round = 4);
 		assertTrue(round1.isequal(atob.round(2)));

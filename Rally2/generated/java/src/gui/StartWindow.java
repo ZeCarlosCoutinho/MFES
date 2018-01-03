@@ -148,7 +148,27 @@ public class StartWindow {
 		ss.teams.addAll(new ArrayList<Team>() {{ add(team); add(team2);}});
 		ss.stages.addAll(new ArrayList<Stage>() {{ add(s1); add(s2); add(s3);}});
 		
+		Rally2.Date date5 = new Date(2010, 9, 21, 10, 30, 00);
+		Rally2.Date date6 = new Date(2010, 9, 23, 20, 30, 00);
+		AtoB atob =  new AtoB("Pikes Peak International Hill Climb", "Pikes Peak, Colorado, USA", date5, date6);
+		
+		atob.addRound(car1, 546157, new Rally2.Date(2010, 9, 21, 10, 40, 00));
+		atob.addRound(car2, 546249, new Rally2.Date(2010, 9, 21, 10, 50, 00));
+		atob.addRound(car3, 548578, new Rally2.Date(2010, 9, 21, 11, 00, 00));
+		atob.addRound(team.getCar(2), 547122, new Rally2.Date(2010, 9, 21, 11, 10, 00));
+		
+		atob.addRound(car1, 557935, new Rally2.Date(2010, 9, 21, 11, 20, 00));
+		atob.addRound(car2, 548239, new Rally2.Date(2010, 9, 21, 11, 30, 00));
+		atob.addRound(car3, 559935, new Rally2.Date(2010, 9, 21, 11, 40, 00));
+		atob.addRound(car4, 554679, new Rally2.Date(2010, 9, 21, 11, 50, 00));
+		
+		atob.addRound(car1, 562486, new Rally2.Date(2010, 9, 21, 12, 00, 00));
+		atob.addRound(car2, 551356, new Rally2.Date(2010, 9, 21, 12, 10, 00));
+		atob.addRound(car3, 566036, new Rally2.Date(2010, 9, 21, 12, 20, 00));
+		atob.addRound(car4, 541092, new Rally2.Date(2010, 9, 21, 12, 20, 00));
+		
 		events.add(ss);
+		events.add(atob);
 	}
 
 	/**
