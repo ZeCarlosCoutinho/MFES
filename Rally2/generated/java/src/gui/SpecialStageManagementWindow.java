@@ -2,6 +2,9 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
@@ -51,12 +54,34 @@ public class SpecialStageManagementWindow extends JFrame {
 		
 		DefaultListModel<String> l_stages = new DefaultListModel<>();
 		list_stages = new JList<String>(l_stages);
+		list_stages.addMouseListener(new MouseAdapter() {
+		    public void mouseClicked(MouseEvent evt) {
+		        JList<String> list = (JList<String>)evt.getSource();
+		        if (evt.getClickCount() == 2) {
+		        	Rectangle r = list.getCellBounds(0, list.getLastVisibleIndex()); 
+		        	if (r != null && r.contains(evt.getPoint())) { 
+		        		int index = list.locationToIndex(evt.getPoint()); 
+		        		StageManagementWindow tmw = new StageManagementWindow(getStage(list_stages.getModel().getElementAt(index)));
+		        		tmw.setVisible(true);
+		        		frame.setEnabled(false);
+		        		tmw.addWindowListener(new java.awt.event.WindowAdapter() {
+		        		    @Override
+		        		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		        		        frame.setEnabled(true);
+		        		    }
+		        		});
+		        		
+		        	}
+		        }
+		    }
+		});
 		JScrollPane stages_listScroller = new JScrollPane();
 		stages_listScroller.setViewportView(list_stages);
 		stages_listScroller.setBounds(31, 105, 296, 271);
 		contentPane.add(stages_listScroller);
 		
-		list_teams = new JList<String>();
+		DefaultListModel<String> l_teams = new DefaultListModel<>();
+		list_teams = new JList<String>(l_teams);
 		JScrollPane teams_listScroller = new JScrollPane();
 		teams_listScroller.setViewportView(list_teams);
 		teams_listScroller.setBounds(414, 105, 296, 271);
@@ -85,5 +110,15 @@ public class SpecialStageManagementWindow extends JFrame {
 		
 		list_teams.setModel(l_teams);
 		list_teams.repaint();
+	}
+	
+	private Stage getStage(String name){
+		Iterator<Stage> ir_stages = ss.stages.iterator();
+		while(ir_stages.hasNext()){
+			Stage stage = ir_stages.next();
+			if(stage.name.equals(name))
+				return stage;
+		}
+		return null;
 	}
 }
