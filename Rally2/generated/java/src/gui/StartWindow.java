@@ -103,7 +103,7 @@ public class StartWindow {
 		
 		s1.stage_results.addAll(new ArrayList<StageResult>() {{ add(stageResult1); add(stageResult2); add(stageResult3); add(stageResult4);}});
 		s2.stage_results.addAll(new ArrayList<StageResult>() {{ add(stageResult5); add(stageResult6); add(stageResult7); add(stageResult8);}});
-		s1.stage_results.addAll(new ArrayList<StageResult>() {{ add(stageResult9); add(stageResult10); add(stageResult11); add(stageResult12);}});
+		s3.stage_results.addAll(new ArrayList<StageResult>() {{ add(stageResult9); add(stageResult10); add(stageResult11); add(stageResult12);}});
 		
 		ss.teams.addAll(new ArrayList<Team>() {{ add(team); add(team2);}});
 		ss.stages.addAll(new ArrayList<Stage>() {{ add(s1); add(s2); add(s3);}});
