@@ -17,13 +17,16 @@ operations
     cars := {};
     team_members := {mngr};
     manager := mngr;
-    );
+    manager.team := self;
+    )
+    pre mngr.team = nil; 
 
   public  addDriver : seq of (char) * seq of (char) ==> ()
   addDriver(nm, nati) ==
     (
     dcl driver : Driver := new Driver(nm, nati);
     team_members := team_members union {driver};
+    driver.team := self;
     )
     pre getMember(nm) = nil
     post getMember(nm) in set team_members;
@@ -34,6 +37,7 @@ operations
     (
     dcl co_driver : CoDriver := new CoDriver(nm, nati);
     team_members := team_members union {co_driver};
+    co_driver.team := self;
     )
     pre getMember(nm) = nil
     post getMember(nm) in set team_members;
@@ -44,6 +48,7 @@ operations
     (
     dcl mechanic : Mechanic := new Mechanic(nm, nati);
     team_members := team_members union {mechanic};
+    mechanic.team := self;
     )
     pre getMember(nm) = nil
     post getMember(nm) in set team_members;

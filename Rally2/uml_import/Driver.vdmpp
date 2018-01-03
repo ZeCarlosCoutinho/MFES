@@ -5,6 +5,7 @@ operations
     (
     nationality := nati;
     name := nm;
+    team := nil;
     )
 
 end Driver
