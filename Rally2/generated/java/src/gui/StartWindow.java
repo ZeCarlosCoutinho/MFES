@@ -221,6 +221,8 @@ public class StartWindow {
 		        		Event e = getEvent(event_list.getModel().getElementAt(index));
 		        		if(e instanceof SpecialStage)
 		        			f = new SpecialStageManagementWindow((SpecialStage) e);
+		        		else if(e instanceof AtoB)
+		        			f = new AtoBManagementWindow((AtoB) e);
 		        		if(f != null){
 		        			System.out.println("ola");
 		        			f.setVisible(true);

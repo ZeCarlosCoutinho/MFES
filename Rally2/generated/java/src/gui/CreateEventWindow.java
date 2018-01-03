@@ -137,8 +137,10 @@ public class CreateEventWindow extends JFrame {
 						switch((int) cmb_type.getSelectedIndex()){
 						case 0:
 							event = new AtoB(txt_name.getText(), txt_loc.getText(), date_start, date_end);
+							break;
 						case 1:
 							event = new SpecialStage(txt_name.getText(), txt_loc.getText(), date_start, date_end);
+							break;
 						}
 						StartWindow.events.add(event);
 						StartWindow.updateLists();
