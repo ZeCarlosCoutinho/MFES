@@ -64,7 +64,6 @@ operations
     pre cars = {} or getCar(number) = nil
     post getCar(number) in set cars;
     
-  -- TODO Add to UML
   public addExistingCar : Car ==> ()
   addExistingCar(c) ==
   (

@@ -35,7 +35,7 @@ operations
   	return car_rounds;
   )
   pre car <> nil;
-
+  
 	--
 	-- Sorts the Rounds by time
 	--
@@ -43,9 +43,20 @@ operations
   sortRounds() ==
   (
   	SelectionSortResults(1);
-  );
-  --TODO Do the post condition, to check if x.round_time > x+1.round_time
+  )
+  post checkSort();
 
+	public pure checkSort : ()  ==> bool
+  checkSort() ==
+  (
+  	for n=1 to len round - 1 do 
+  	(
+  	if round(n).round_time > round(n+1).round_time
+  	then return false;
+  	);
+  	return true;
+  );
+  
   public getFinalResults : ()  ==> seq of Round
   getFinalResults() ==
   (
@@ -110,13 +121,6 @@ functions
 	in if l(mi+1).round_time < l(1).round_time
 	then mi+1
 	else 1;
-	
-	--isSorted : seq of Round -> bool
-	--isSorted(rnds) ==
-	--	let ind in seq rnds be st
-		--	forall ind' in set inds rnds
-		--		& (ind' > ind and rnds(ind').round_time >= rnds(ind).round_time)
-		--		in; 
 
 
 end AtoB
