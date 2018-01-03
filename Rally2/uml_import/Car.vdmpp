@@ -47,8 +47,10 @@ operations
     team := tm;
     number := nmb;
     mechanics := {};
+    team.addCar(self);
     return self;
     )
+    pre forall car in set tm.cars & car.number <> nmb;
 
 
 end Car
