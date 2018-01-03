@@ -3,7 +3,7 @@ instance variables
   public driver:Driver;
   public co_driver:[CoDriver];
   public mechanics:set of (Mechanic);
-  public team:Team;
+  public team:[Team];
   public make:seq of (char);
   public model:seq of (char);
   public year:int;
