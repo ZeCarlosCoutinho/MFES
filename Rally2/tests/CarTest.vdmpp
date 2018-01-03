@@ -9,6 +9,10 @@ operations
 		dcl team : Team := new Team("The Creed", manager);
 		dcl car : Car := new Car("Ford", "Fiesta", 2002, 500, "4wd", 1000, team, 1);
 		
+		driver1.team := team;
+		driver2.team := team;
+		team.team_members := {driver1, driver2};
+		
 		car.setDriver(driver1);
 		assertTrue(car.driver = driver1);
 		car.setDriver(driver2);
@@ -24,6 +28,10 @@ operations
 		
 		dcl codriver1 : CoDriver := new CoDriver("Il Padrino", "Italian");
 		dcl codriver2 : CoDriver := new CoDriver("Leonardo DiCaprio", "American");
+		
+		codriver1.team := team;
+		codriver2.team := team;
+		team.team_members := {codriver1, codriver2};
 		
 		car.setCoDriver(codriver1);
 		assertTrue(car.co_driver = codriver1);
@@ -41,6 +49,10 @@ operations
 		
 		dcl mechanic1 : Mechanic := new Mechanic("Il Padrino", "Italian");
 		dcl mechanic2 : Mechanic := new Mechanic("Leonardo DiCaprio", "American");
+		
+		mechanic1.team := team;
+		mechanic2.team := team;
+		team.team_members := {mechanic1, mechanic2};
 		
 		assertTrue(card car.mechanics = 0);
 		car.addMechanic(mechanic1);

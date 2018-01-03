@@ -18,6 +18,8 @@ operations
     (
     driver := drvr;
     )
+    pre forall car in set team.cars & drvr <> car.driver
+    and drvr.team = self.team
     post driver = drvr;
 
   public  setCoDriver : CoDriver ==> ()
@@ -25,6 +27,8 @@ operations
     (
     co_driver := co_drvr;
     )
+    pre forall car in set team.cars & co_drvr <> car.co_driver
+    and co_drvr.team = self.team
     post co_driver = co_drvr;
 
   public  addMechanic : Mechanic ==> ()
@@ -32,6 +36,9 @@ operations
     (
     mechanics := mechanics union {mechanic};
     )
+    pre forall car in set team.cars & 
+    (if car <> self then mechanic not in set car.mechanics else true) and
+    self.team = mechanic.team
     post mechanic in set mechanics;
     
 
