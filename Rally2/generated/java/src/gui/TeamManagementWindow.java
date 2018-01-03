@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -19,6 +21,7 @@ import javax.swing.JButton;
 
 import org.overture.codegen.runtime.*;
 import java.awt.Font;
+import java.awt.Rectangle;
 
 public class TeamManagementWindow extends JFrame {
 
@@ -66,6 +69,26 @@ public class TeamManagementWindow extends JFrame {
 		
 		DefaultListModel<String> l_cars = new DefaultListModel<>();
 		list_cars = new JList<String>(l_cars);
+		list_cars.addMouseListener(new MouseAdapter() {
+		    public void mouseClicked(MouseEvent evt) {
+		        JList<String> list = (JList<String>)evt.getSource();
+		        if (evt.getClickCount() == 2) {
+		        	Rectangle r = list.getCellBounds(0, list.getLastVisibleIndex()); 
+		        	if (r != null && r.contains(evt.getPoint())) { 
+		        		int index = list.locationToIndex(evt.getPoint());
+		        		CarInfoWindow tmw = new CarInfoWindow(team.getCar(Integer.parseInt(list_cars.getModel().getElementAt(index).split(" - ")[0].trim())));
+		        		tmw.setVisible(true);
+		        		frame.setEnabled(false);
+		        		tmw.addWindowListener(new java.awt.event.WindowAdapter() {
+		        		    @Override
+		        		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		        		        frame.setEnabled(true);
+		        		    }
+		        		});
+		        	}
+		        }
+		    }
+		});
 		list_cars.setFont(new Font("Monospaced", Font.PLAIN, 12));
 		JScrollPane cars_listScroller = new JScrollPane();
 		cars_listScroller.setViewportView(list_cars);
