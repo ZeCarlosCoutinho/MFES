@@ -6,7 +6,7 @@ operations
 	--
 	-- Adds a car's Round result to the AtoB event
 	--
-  public  addRound : Car * int * Date ==> ()
+  public  addRound : Car * nat1 * Date ==> ()
   addRound(car, round_time, date) ==
     (
     	dcl newRound : Round := new Round(round_time, date, car);
@@ -15,6 +15,7 @@ operations
     pre car <> undefined 
     	and round_time <> undefined
     	and date <> undefined
+    	and car.team in set teams
     post getRound(car, date) in set elems round;
 
 	-- 

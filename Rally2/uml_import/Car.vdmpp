@@ -44,10 +44,11 @@ operations
     bhp := hp;
     traction := trc;
     weight := wght;
+    team := nil; --Necessary because of preconditions
+    tm.addExistingCar(self);
     team := tm;
     number := nmb;
     mechanics := {};
-    team.addCar(self);
     return self;
     )
     pre forall car in set tm.cars & car.number <> nmb;

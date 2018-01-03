@@ -13,6 +13,9 @@ operations
 		dcl atob : AtoB := new AtoB("Super Mario Mountain Climb", "Italy", date, end_date);
 		dcl round : Round := new Round(round_time, date, car);
 		
+		atob.teams := {team};
+		team.events := {atob};
+		
 		atob.addRound(car, round_time, date);
 		assertTrue(round.isequal(atob.round(1)));
 	);
@@ -34,6 +37,9 @@ operations
 		dcl atob : AtoB := new AtoB("Super Mario Mountain Climb", "Italy", date1, end_date);
 		
 		dcl result : seq of Round;
+		
+		atob.teams := {team};
+		team.events := {atob};
 		
 		atob.addRound(car1, round_time1, date1);
 		atob.addRound(car2, round_time2, date1);
@@ -62,10 +68,14 @@ operations
 		dcl round_time4: int := 5505;
 		
 		dcl atob : AtoB := new AtoB("Super Mario Mountain Climb", "Italy", date1, end_date);
+		
 		dcl round1 : Round := new Round(round_time1, date1, car1);
 		dcl round2 : Round := new Round(round_time2, date1, car2);
 		dcl round3 : Round := new Round(round_time3, date2, car1);
 		dcl round4 : Round := new Round(round_time4, date2, car2);
+		
+		atob.teams := {team};
+		team.events := {atob};
 				
 		atob.addRound(car1, round_time1, date1);
 		atob.addRound(car2, round_time2, date1);

@@ -65,8 +65,8 @@ operations
     post getCar(number) in set cars;
     
   -- TODO Add to UML
-  public addCar : Car ==> ()
-  addCar(c) ==
+  public addExistingCar : Car ==> ()
+  addExistingCar(c) ==
   (
 		cars := cars union {c};  
 		
