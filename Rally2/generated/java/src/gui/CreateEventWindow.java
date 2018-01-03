@@ -12,6 +12,7 @@ import Rally2.*;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Calendar;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -123,8 +124,13 @@ public class CreateEventWindow extends JFrame {
 					Date start = (Date) spinner_start.getModel().getValue();
 					Date end = (Date) spinner_end.getModel().getValue();
 					
-					Rally2.Date date_start = new Rally2.Date(start.getYear(), start.getMonth(), start.getDay(), start.getHours(), start.getMinutes(), start.getSeconds());
-					Rally2.Date date_end = new Rally2.Date(end.getYear(), end.getMonth(), end.getDay(), end.getHours(), end.getMinutes(), end.getSeconds());
+					Calendar c_start = new GregorianCalendar();
+					Calendar c_end = new GregorianCalendar();
+					c_start.setTime(start);
+					c_end.setTime(end);
+					
+					Rally2.Date date_start = new Rally2.Date(c_start.get(Calendar.YEAR), c_start.get(Calendar.MONTH) + 1, c_start.get(Calendar.DAY_OF_MONTH), c_start.get(Calendar.HOUR_OF_DAY), c_start.get(Calendar.MINUTE), c_start.get(Calendar.SECOND));
+					Rally2.Date date_end = new Rally2.Date(c_end.get(Calendar.YEAR), c_end.get(Calendar.MONTH) + 1, c_end.get(Calendar.DAY_OF_MONTH), c_end.get(Calendar.HOUR_OF_DAY), c_end.get(Calendar.MINUTE), c_end.get(Calendar.SECOND));
 					
 					if(start.before(end)){
 						Event event = null;

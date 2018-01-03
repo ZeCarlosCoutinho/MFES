@@ -15,6 +15,9 @@ import javax.swing.border.EmptyBorder;
 
 import Rally2.*;
 import javax.swing.JList;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SpecialStageManagementWindow extends JFrame {
 
@@ -23,6 +26,7 @@ public class SpecialStageManagementWindow extends JFrame {
 	private JFrame frame;
 	private static JList<String> list_stages;
 	private static JList<String> list_teams;
+	private JButton btnAddStage;
 
 	/**
 	 * Launch the application.
@@ -87,10 +91,27 @@ public class SpecialStageManagementWindow extends JFrame {
 		teams_listScroller.setBounds(414, 105, 296, 271);
 		contentPane.add(teams_listScroller);
 		
-		updateStages();
+		btnAddStage = new JButton("Add Stage");
+		btnAddStage.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddStageWindow ct = new AddStageWindow(ss);
+				ct.setVisible(true);
+				frame.setEnabled(false);
+        		ct.addWindowListener(new java.awt.event.WindowAdapter() {
+        		    @Override
+        		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+        		        frame.setEnabled(true);
+        		    }
+        		});
+			}
+		});
+		btnAddStage.setBounds(131, 403, 89, 23);
+		contentPane.add(btnAddStage);
+		
+		updateLists();
 	}
 
-	private static void updateStages() {
+	public static void updateLists() {
 		DefaultListModel<String> l_stages = new DefaultListModel<>();
 		Iterator<Stage> ir_stages = ss.stages.iterator();
 		while(ir_stages.hasNext()){

@@ -5,21 +5,31 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
 import Rally2.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+import java.util.Iterator;
 import java.awt.event.ActionEvent;
+import javax.swing.JList;
+import javax.swing.ListModel;
+import java.awt.Font;
+import java.awt.Rectangle;
 
 public class CarInfoWindow extends JFrame {
 
 	private JPanel contentPane;
 	private JFrame frame;
 	private Car car;
+	private JList<String> list_members;
 	
 	/**
 	 * Launch the application.
@@ -43,7 +53,7 @@ public class CarInfoWindow extends JFrame {
 	public CarInfoWindow(Car c) {
 		this.frame = this;
 		this.car = c;
-		setBounds(100, 100, 363, 393);
+		setBounds(100, 100, 717, 393);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -118,7 +128,7 @@ public class CarInfoWindow extends JFrame {
 				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			}
 		});
-		btnDone.setBounds(120, 314, 89, 23);
+		btnDone.setBounds(318, 308, 89, 23);
 		contentPane.add(btnDone);
 		
 		JLabel lblTeam = new JLabel("Team : ");
@@ -129,5 +139,50 @@ public class CarInfoWindow extends JFrame {
 		JLabel label_2 = new JLabel(car.team.name);
 		label_2.setBounds(110, 268, 201, 14);
 		contentPane.add(label_2);
+		
+		DefaultListModel<String> l_members = new DefaultListModel<>();
+		list_members = new JList<String>(l_members);
+		list_members.addMouseListener(new MouseAdapter() {
+		    public void mouseClicked(MouseEvent evt) {
+		        JList<String> list = (JList<String>)evt.getSource();
+		        if (evt.getClickCount() == 2) {
+		        	Rectangle r = list.getCellBounds(0, list.getLastVisibleIndex()); 
+		        	if (r != null && r.contains(evt.getPoint())) { 
+		        		int index = list.locationToIndex(evt.getPoint());
+		        		TeamMemberInfoWindow tmw = new TeamMemberInfoWindow(car.team.getMember(list_members.getModel().getElementAt(index).split(" - ")[1].trim()), car.team);
+		        		tmw.setVisible(true);
+		        		frame.setEnabled(false);
+		        		tmw.addWindowListener(new java.awt.event.WindowAdapter() {
+		        		    @Override
+		        		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		        		        frame.setEnabled(true);
+		        		    }
+		        		});
+		        	}
+		        }
+		    }
+		});
+		list_members.setFont(new Font("Monospaced", Font.PLAIN, 12));
+		JScrollPane members_listScroller = new JScrollPane();
+		members_listScroller.setViewportView(list_members);
+		members_listScroller.setBounds(318, 26, 370, 256);
+		contentPane.add(members_listScroller);
+		
+		updateLists();
+	}
+	
+	public void updateLists(){
+		DefaultListModel<String> l_members = new DefaultListModel<>();
+		
+		l_members.addElement("Driver    - " + car.driver.name);
+		l_members.addElement("Co-Driver - " + car.co_driver.name);
+		
+		Iterator<TeamMember> ir_mec = car.mechanics.iterator();
+		while(ir_mec.hasNext()){
+			l_members.addElement("Mechanic  - " + ir_mec.next().name);
+		}
+		
+		list_members.setModel(l_members);
+		list_members.repaint();
 	}
 }
