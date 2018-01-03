@@ -1,10 +1,10 @@
 class StageResult
 instance variables
   public car:Car;
-  public stage_time:int;
+  public stage_time:nat1;
 
 operations
-  public  StageResult : Car * int ==> StageResult
+  public  StageResult : Car * nat1 ==> StageResult
   StageResult(c, s_t) ==
     (
     car := c;

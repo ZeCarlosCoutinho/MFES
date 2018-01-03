@@ -2,10 +2,10 @@ class Round
 instance variables
   public car:Car;
   public date:Date;
-  public round_time:int;
+  public round_time:nat1;
 
 operations
-  public  Round : int * Date * Car ==> Round
+  public  Round : nat1 * Date * Car ==> Round
   Round(r_t, dt, cr) ==
     (
     	car := cr;
