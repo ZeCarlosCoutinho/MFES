@@ -13,6 +13,9 @@ operations
 		dcl atob : AtoB := new AtoB("Super Mario Mountain Climb", "Italy", date, end_date);
 		dcl round : Round := new Round(round_time, date, car);
 		
+		atob.teams := {team};
+		team.events := {atob};
+		
 		atob.addRound(car, round_time, date);
 		assertTrue(round.isequal(atob.round(1)));
 	);
@@ -26,7 +29,7 @@ operations
 		dcl manager : Manager := new Manager("Ezio Auditore", "Italian");
 		dcl team : Team := new Team("The Creed", manager);
 		dcl car1 : Car := new Car("Ford", "Fiesta", 2002, 500, "4wd", 1000, team, 1);
-		dcl car2 : Car := new Car("Citroen", "Xsara", 2000, 450, "4wd", 1450, team, 1);
+		dcl car2 : Car := new Car("Citroen", "Xsara", 2000, 450, "4wd", 1450, team, 2);
 		dcl round_time1 : int := 6600;
 		dcl round_time2: int := 7000;
 		dcl round_time3: int := 6650;
@@ -34,6 +37,9 @@ operations
 		dcl atob : AtoB := new AtoB("Super Mario Mountain Climb", "Italy", date1, end_date);
 		
 		dcl result : seq of Round;
+		
+		atob.teams := {team};
+		team.events := {atob};
 		
 		atob.addRound(car1, round_time1, date1);
 		atob.addRound(car2, round_time2, date1);
@@ -55,17 +61,21 @@ operations
 		dcl manager : Manager := new Manager("Ezio Auditore", "Italian");
 		dcl team : Team := new Team("The Creed", manager);
 		dcl car1 : Car := new Car("Ford", "Fiesta", 2002, 500, "4wd", 1000, team, 1);
-		dcl car2 : Car := new Car("Citroen", "Xsara", 2000, 450, "4wd", 1450, team, 1);
+		dcl car2 : Car := new Car("Citroen", "Xsara", 2000, 450, "4wd", 1450, team, 2);
 		dcl round_time1 : int := 6600;
 		dcl round_time2: int := 7000;
 		dcl round_time3: int := 6650;
 		dcl round_time4: int := 5505;
 		
 		dcl atob : AtoB := new AtoB("Super Mario Mountain Climb", "Italy", date1, end_date);
+		
 		dcl round1 : Round := new Round(round_time1, date1, car1);
 		dcl round2 : Round := new Round(round_time2, date1, car2);
 		dcl round3 : Round := new Round(round_time3, date2, car1);
 		dcl round4 : Round := new Round(round_time4, date2, car2);
+		
+		atob.teams := {team};
+		team.events := {atob};
 				
 		atob.addRound(car1, round_time1, date1);
 		atob.addRound(car2, round_time2, date1);

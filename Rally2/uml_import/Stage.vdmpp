@@ -4,11 +4,11 @@ instance variables
   public stage_results:seq of (StageResult);
   public date:Date;
   public name:seq of (char);
-  public distance:int;
-  public number:int;
+  public distance:nat1;
+  public number:nat;
 
 operations
-  public  Stage : seq of (char) * int * int * Date * Event==> Stage
+  public  Stage : seq of (char) * nat * nat1 * Date * Event==> Stage
   Stage(n, d, nmbr, dt, evnt) ==
     (
     name := n;
@@ -19,7 +19,7 @@ operations
     event := evnt;
     );
 
-  public  addStageResult : Car * int ==> ()
+  public  addStageResult : Car * nat1 ==> ()
   addStageResult(c, s_t) ==
     (
     dcl result:StageResult := new StageResult(c, s_t);

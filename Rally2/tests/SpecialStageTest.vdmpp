@@ -99,6 +99,7 @@ testGetResults() ==
 		
 		dcl team:Team := new Team("M-Sport", manager);
 		dcl team2:Team := new Team("TOYOTA GAZOO RACING WRT", manager2);
+		
 		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", new Date(), new Date());
 		
 		dcl results : seq of (StageResult);

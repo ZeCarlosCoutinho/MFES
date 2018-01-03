@@ -13,7 +13,18 @@ instance variables
 	timestamp : TimeStamp := mk_TimeStamp(0, 0, 0);
 
 operations
-  public  Date : int * int * int * int * int * int ==> Date
+	public 	Date: () ==> Date
+	Date() ==
+	(
+		calendardate.year := 0;
+  	calendardate.month := 1;
+  	calendardate.day := 1;
+  	timestamp.hours := 0;
+  	timestamp.minutes := 0;
+  	timestamp.seconds := 0;
+	);
+	
+  public  Date : nat * nat1 * nat1 * nat * nat * nat ==> Date
   Date(yr, mnth, d, hrs, mnts, scnds) ==
   (
   	calendardate.year := yr;

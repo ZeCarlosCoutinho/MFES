@@ -3,13 +3,13 @@ instance variables
   public driver:Driver;
   public co_driver:[CoDriver];
   public mechanics:set of (Mechanic);
-  public team:Team;
+  public team:[Team];
   public make:seq of (char);
   public model:seq of (char);
   public year:int;
-  public bhp:int;
+  public bhp:nat1;
   public traction:seq of (char);
-  public weight:int;
+  public weight:nat1;
   public number:int;
 
 operations
@@ -44,11 +44,14 @@ operations
     bhp := hp;
     traction := trc;
     weight := wght;
+    team := nil; --Necessary because of preconditions
+    tm.addExistingCar(self);
     team := tm;
     number := nmb;
     mechanics := {};
     return self;
     )
+    pre forall car in set tm.cars & car.number <> nmb;
 
 
 end Car
