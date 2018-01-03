@@ -61,6 +61,26 @@ public class TeamManagementWindow extends JFrame {
 		
 		DefaultListModel<String> l_members = new DefaultListModel<>();
 		list_members = new JList<String>(l_members);
+		list_members.addMouseListener(new MouseAdapter() {
+		    public void mouseClicked(MouseEvent evt) {
+		        JList<String> list = (JList<String>)evt.getSource();
+		        if (evt.getClickCount() == 2) {
+		        	Rectangle r = list.getCellBounds(0, list.getLastVisibleIndex()); 
+		        	if (r != null && r.contains(evt.getPoint())) { 
+		        		int index = list.locationToIndex(evt.getPoint());
+		        		TeamMemberInfoWindow tmw = new TeamMemberInfoWindow(team.getMember(list_members.getModel().getElementAt(index).split(" - ")[1].trim()), team);
+		        		tmw.setVisible(true);
+		        		frame.setEnabled(false);
+		        		tmw.addWindowListener(new java.awt.event.WindowAdapter() {
+		        		    @Override
+		        		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		        		        frame.setEnabled(true);
+		        		    }
+		        		});
+		        	}
+		        }
+		    }
+		});
 		list_members.setFont(new Font("Monospaced", Font.PLAIN, 12));
 		JScrollPane members_listScroller = new JScrollPane();
 		members_listScroller.setViewportView(list_members);

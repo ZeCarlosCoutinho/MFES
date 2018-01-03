@@ -43,7 +43,7 @@ public class CarInfoWindow extends JFrame {
 	public CarInfoWindow(Car c) {
 		this.frame = this;
 		this.car = c;
-		setBounds(100, 100, 362, 393);
+		setBounds(100, 100, 363, 393);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
