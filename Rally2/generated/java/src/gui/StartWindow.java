@@ -64,21 +64,61 @@ public class StartWindow {
 		Team team = new Team("M-Sport", manager);
 		Team team2 = new Team("TOYOTA GAZOO RACING WRT", manager2);
 		
+		Driver driver1 = new Driver("Sébastien Ogier", "French");
+		Driver driver2 = new Driver("Ott Tänak", "Estonian");
+		Driver driver3 = new Driver("Elfyn Evans", "British");
+		CoDriver co1 = new CoDriver("Julien Ingrassia", "French");
+		CoDriver co2 = new CoDriver("Martin Järveoja", "Estonian");
+		CoDriver co3 = new CoDriver("Daniel Barritt", "British");
+		Mechanic mec1 = new Mechanic("William Lawrence", "British");
+		Mechanic mec2 = new Mechanic("Reiner Buchwald", "German");
+		Mechanic mec3 = new Mechanic("Roderick Gilbert", "Scottish");
+		Mechanic mec4 = new Mechanic("Felipe Warner", "Brazilian");
+		
+		Driver driver12 = new Driver("Jari-Matti Latvala", "Finish");
+		Driver driver22 = new Driver("Esapekka Lappi", "Finish");
+		Driver driver32 = new Driver("Kai Hynninen", "Finish");
+		CoDriver co12 = new CoDriver("Miikka Anttila", "Finish");
+		CoDriver co22 = new CoDriver("Janne Ferm", "Finish");
+		CoDriver co32 = new CoDriver("Hannes Pennanen", "Finish");
+		Mechanic mec12 = new Mechanic("Heikki Saikkonen", "Finish");
+		Mechanic mec22 = new Mechanic("Atte Ritala", "Finish");
+		Mechanic mec32 = new Mechanic("Aki Heikkilä", "Finish");
+		Mechanic mec42 = new Mechanic("Henri Venäläinen	", "Finish");
+		
+		team.team_members.addAll(new ArrayList<TeamMember>() {{ add(driver1); add(driver2); add(driver3);}});
+		team.team_members.addAll(new ArrayList<TeamMember>() {{ add(co1); add(co2); add(co3);}});
+		team.team_members.addAll(new ArrayList<TeamMember>() {{ add(mec1); add(mec2); add(mec3); add(mec4);}});
+		
+		team2.team_members.addAll(new ArrayList<TeamMember>() {{ add(driver12); add(driver22); add(driver32);}});
+		team2.team_members.addAll(new ArrayList<TeamMember>() {{ add(co12); add(co22); add(co32);}});
+		team2.team_members.addAll(new ArrayList<TeamMember>() {{ add(mec12); add(mec22); add(mec32); add(mec42);}});
+		
 		Car car1 = new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team, 1);
 		Car car2 = new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team, 2);
+		Car car6 = new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team, 3);
 		Car car3 = new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 10);
 		Car car4 = new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 11);
+		Car car5 = new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 12);
 		
-		team.cars.addAll(new ArrayList<Car>() {{ add(car1); add(car2);}});
-		team2.cars.addAll(new ArrayList<Car>() {{ add(car3); add(car4);}});
+		car1.driver = driver1; car1.co_driver = co1; car1.mechanics.add(mec1); car1.mechanics.add(mec2);
+		car2.driver = driver2; car2.co_driver = co2; car2.mechanics.add(mec3);
+		car6.driver = driver3; car6.co_driver = co3; car6.mechanics.add(mec4);
+		
+		car3.driver = driver12; car3.co_driver = co12; car3.mechanics.add(mec12); car1.mechanics.add(mec22);
+		car4.driver = driver22; car4.co_driver = co22; car4.mechanics.add(mec32);
+		car5.driver = driver32; car5.co_driver = co32; car5.mechanics.add(mec42);	
+
+		team.cars.addAll(new ArrayList<Car>() {{ add(car1); add(car2); add(car6);}});
+		team2.cars.addAll(new ArrayList<Car>() {{ add(car3); add(car4); add(car5);}});
 		
 		teams.add(team);
 		teams.add(team2);
 		
 		Rally2.Date date1 = new Rally2.Date(2017, 10, 17, 10, 0, 0);
 		Rally2.Date date2 = new Rally2.Date(2017, 10, 21, 20, 0, 0);
-		Rally2.Date date3 = new Rally2.Date(2017, 5, 3, 12, 0, 0);
-		Rally2.Date date4 = new Rally2.Date(2017, 2, 8, 22, 0, 0);
+		Rally2.Date date3 = new Rally2.Date(2017, 12, 3, 12, 0, 0);
+		Rally2.Date date4 = new Rally2.Date(2017, 12, 8, 22, 0, 0);
 	
 		SpecialStage ss = new SpecialStage("Vodafone Rally de Portugal", "Portugal", date3, date4);
 		

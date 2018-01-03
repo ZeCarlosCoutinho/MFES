@@ -23,9 +23,10 @@ import javax.swing.JLabel;
 public class StageManagementWindow extends JFrame {
 
 	private JPanel contentPane;
-	private Stage stage;
+	private static Stage stage;
+	private static SpecialStage ss;
 	private JFrame frame;
-	private JList<String> list;
+	private static JList<String> list;
 
 	/**
 	 * Launch the application.
@@ -34,7 +35,7 @@ public class StageManagementWindow extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StageManagementWindow frame = new StageManagementWindow(new Stage());
+					StageManagementWindow frame = new StageManagementWindow(new Stage(), new SpecialStage());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,8 +47,9 @@ public class StageManagementWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public StageManagementWindow(Stage s) {
+	public StageManagementWindow(Stage s, SpecialStage ss) {
 		this.stage = s;
+		this.ss= ss;
 		this.frame = this;
 		setBounds(100, 100, 451, 495);
 		contentPane = new JPanel();
@@ -65,7 +67,21 @@ public class StageManagementWindow extends JFrame {
 		updateList();
 		
 		JButton btnAddStageResult = new JButton("Add Stage Result");
-		btnAddStageResult.setBounds(244, 406, 115, 23);
+		btnAddStageResult.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				AddStageResultWindow ct = new AddStageResultWindow(s, ss);
+				ct.setVisible(true);
+				frame.setEnabled(false);
+        		ct.addWindowListener(new java.awt.event.WindowAdapter() {
+        		    @Override
+        		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+        		        frame.setEnabled(true);
+        		    }
+        		});
+			}
+		});
+		btnAddStageResult.setBounds(234, 406, 136, 23);
 		contentPane.add(btnAddStageResult);
 		
 		JButton btnDone = new JButton("Done");
@@ -74,7 +90,7 @@ public class StageManagementWindow extends JFrame {
 				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			}
 		});
-		btnDone.setBounds(82, 406, 115, 23);
+		btnDone.setBounds(61, 406, 136, 23);
 		contentPane.add(btnDone);
 		
 		JLabel lblTimeTeam = new JLabel("       time                #           team");
@@ -82,7 +98,7 @@ public class StageManagementWindow extends JFrame {
 		contentPane.add(lblTimeTeam);
 	}
 	
-	private void updateList(){
+	public static void updateList(){
 		stage.sortResults();
 		
 		DefaultListModel<String> l_srs = new DefaultListModel<>();

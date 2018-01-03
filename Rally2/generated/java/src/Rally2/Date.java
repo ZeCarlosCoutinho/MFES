@@ -5,8 +5,8 @@ import org.overture.codegen.runtime.*;
 
 @SuppressWarnings("all")
 public class Date {
-  private CalendarDate calendardate = new CalendarDate(0L, 1L, 1L);
-  private TimeStamp timestamp = new TimeStamp(0L, 0L, 0L);
+  public CalendarDate calendardate = new CalendarDate(0L, 1L, 1L);
+  public TimeStamp timestamp = new TimeStamp(0L, 0L, 0L);
 
   public void cg_init_Date_1(
       final Number yr,
