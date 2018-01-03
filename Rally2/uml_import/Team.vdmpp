@@ -19,7 +19,8 @@ operations
     manager := mngr;
     manager.team := self;
     )
-    pre mngr.team = nil; 
+    pre mngr.team = nil
+    post mngr.team = self and mngr in set team_members;
 
   public  addDriver : seq of (char) * seq of (char) ==> ()
   addDriver(nm, nati) ==

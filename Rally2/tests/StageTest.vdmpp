@@ -18,11 +18,13 @@ public testStage: () ==> ()
 public testAddStageResult: () ==> ()
 	testAddStageResult() ==
 	(
-		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", new Date(), new Date());
+		dcl beginning_date : Date := new Date(2010, 9, 21, 20, 30, 00);
+		dcl end_date : Date := new Date(2010, 9, 22, 20, 30, 00);
+		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", beginning_date, end_date);
 		dcl stage:Stage := new Stage("SS1 LOUSADA", 3360, 1, new Date(), event);
 		
-		dcl team1:Team := new Team("M-Sport", new Manager());
-		dcl team2:Team := new Team("TOYOTA GAZOO RACING WRT", new Manager());
+		dcl team1:Team := new Team("M-Sport", new Manager("Malcom Wilson", "British"));
+		dcl team2:Team := new Team("TOYOTA GAZOO RACING WRT", new Manager("Tommi Mäkinen", "Finish"));
 		
 		dcl car1 : Car := new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team1, 1);
 		dcl car2 : Car := new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team1, 2);
@@ -47,11 +49,14 @@ public testAddStageResult: () ==> ()
 public testSortStageResults: () ==> ()
 	testSortStageResults() ==
 	(
-		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", new Date(), new Date());
-		dcl stage:Stage := new Stage("SS1 LOUSADA", 3360, 1, new Date(), event);
+		dcl beginning_date : Date := new Date(2010, 9, 21, 20, 30, 00);
+		dcl mid_date : Date := new Date(2010, 9, 21, 22, 30, 00);
+		dcl end_date : Date := new Date(2010, 9, 22, 20, 30, 00);
+		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", beginning_date, end_date);
+		dcl stage:Stage := new Stage("SS1 LOUSADA", 3360, 1, mid_date, event);
 		
-		dcl team1:Team := new Team("M-Sport", new Manager());
-		dcl team2:Team := new Team("TOYOTA GAZOO RACING WRT", new Manager());
+		dcl team1:Team := new Team("M-Sport", new Manager("Malcom Wilson", "British"));
+		dcl team2:Team := new Team("TOYOTA GAZOO RACING WRT", new Manager("Tommi Mäkinen", "Finish"));
 		
 		dcl car1 : Car := new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team1, 1);
 		dcl car2 : Car := new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team1, 2);
@@ -78,11 +83,13 @@ public testSortStageResults: () ==> ()
 public testGetStageResult: () ==> ()
 	testGetStageResult() ==
 	(
-		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", new Date(), new Date());
+		dcl beginning_date : Date := new Date(2010, 9, 21, 20, 30, 00);
+		dcl end_date : Date := new Date(2010, 9, 22, 20, 30, 00);
+		dcl event:SpecialStage := new SpecialStage("Vodafone Rally de Portugal", "Portugal", beginning_date, end_date);
 		dcl stage:Stage := new Stage("SS1 LOUSADA", 3360, 1, new Date(), event);
 		
-		dcl team1:Team := new Team("M-Sport", new Manager());
-		dcl team2:Team := new Team("TOYOTA GAZOO RACING WRT", new Manager());
+		dcl team1:Team := new Team("M-Sport", new Manager("Malcom Wilson", "British"));
+		dcl team2:Team := new Team("TOYOTA GAZOO RACING WRT", new Manager("Tommi Mäkinen", "Finish"));
 		
 		dcl car1 : Car := new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team1, 1);
 		dcl car2 : Car := new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team1, 2);
