@@ -21,7 +21,7 @@ import java.awt.event.WindowEvent;
 import java.util.Iterator;
 import java.awt.event.ActionEvent;
 
-public class SpecialStageResults extends JFrame {
+public class SpecialStageResultsWindow extends JFrame {
 
 	private JPanel contentPane;
 	private JFrame frame;
@@ -35,7 +35,7 @@ public class SpecialStageResults extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SpecialStageResults frame = new SpecialStageResults(new SpecialStage());
+					SpecialStageResultsWindow frame = new SpecialStageResultsWindow(new SpecialStage());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,7 +47,7 @@ public class SpecialStageResults extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SpecialStageResults(SpecialStage ss) {
+	public SpecialStageResultsWindow(SpecialStage ss) {
 		this.ss = ss;
 		this.frame = this;
 		setBounds(100, 100, 450, 381);

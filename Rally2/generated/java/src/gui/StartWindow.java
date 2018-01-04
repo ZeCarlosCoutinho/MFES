@@ -165,7 +165,9 @@ public class StartWindow {
 		atob.addRound(car1, 562486, new Rally2.Date(2010, 9, 21, 12, 00, 00));
 		atob.addRound(car2, 551356, new Rally2.Date(2010, 9, 21, 12, 10, 00));
 		atob.addRound(car3, 566036, new Rally2.Date(2010, 9, 21, 12, 20, 00));
-		atob.addRound(car4, 541092, new Rally2.Date(2010, 9, 21, 12, 20, 00));
+		atob.addRound(car4, 541092, new Rally2.Date(2010, 9, 21, 12, 30, 00));
+		
+		atob.teams.addAll(new ArrayList<Team>() {{ add(team); add(team2);}});
 		
 		events.add(ss);
 		events.add(atob);

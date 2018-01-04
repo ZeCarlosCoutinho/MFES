@@ -112,7 +112,7 @@ public class SpecialStageManagementWindow extends JFrame {
 		btnEventResults = new JButton("Event Results");
 		btnEventResults.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SpecialStageResults ct = new SpecialStageResults(ss);
+				SpecialStageResultsWindow ct = new SpecialStageResultsWindow(ss);
 				ct.setVisible(true);
 				frame.setEnabled(false);
         		ct.addWindowListener(new java.awt.event.WindowAdapter() {

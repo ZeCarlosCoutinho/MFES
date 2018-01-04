@@ -1,35 +1,41 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
-import java.util.ArrayList;
-import java.util.Iterator;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Rally2.*;
+import javax.swing.JList;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Calendar;
 
-public class AddStageResultWindow extends JFrame {
+public class AddRoundWindow extends JFrame {
 
 	private JPanel contentPane;
 	private JFrame frame;
-	private SpecialStage ss;
-	private Stage stage;
+	private AtoB atob;
 	private JTextField txt_minutes;
 	private JTextField txt_seconds;
 	private JTextField txt_millis;
+	private JSpinner spinner;
 	private JComboBox<String> comboBox;
 
 	/**
@@ -39,7 +45,7 @@ public class AddStageResultWindow extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddStageResultWindow frame = new AddStageResultWindow(new Stage(), new SpecialStage());
+					AddRoundWindow frame = new AddRoundWindow(new AtoB());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,11 +57,10 @@ public class AddStageResultWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AddStageResultWindow(Stage s, SpecialStage ss) {
-		this.stage = s;
-		this.ss = ss;
+	public AddRoundWindow(AtoB atob) {
 		this.frame = this;
-		setBounds(100, 100, 384, 234);
+		this.atob = atob;
+		setBounds(100, 100, 376, 297);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -63,49 +68,49 @@ public class AddStageResultWindow extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Minutes");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblNewLabel.setBounds(93, 11, 55, 14);
+		lblNewLabel.setBounds(81, 26, 55, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblSeconds = new JLabel("Seconds");
 		lblSeconds.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblSeconds.setBounds(158, 11, 75, 14);
+		lblSeconds.setBounds(146, 26, 75, 14);
 		contentPane.add(lblSeconds);
 		
 		JLabel lblMilliseconds = new JLabel("Milliseconds");
 		lblMilliseconds.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblMilliseconds.setBounds(243, 11, 86, 14);
+		lblMilliseconds.setBounds(231, 26, 86, 14);
 		contentPane.add(lblMilliseconds);
 		
 		txt_minutes = new JTextField();
 		txt_minutes.setHorizontalAlignment(SwingConstants.TRAILING);
-		txt_minutes.setBounds(102, 36, 46, 20);
+		txt_minutes.setBounds(90, 51, 46, 20);
 		contentPane.add(txt_minutes);
 		txt_minutes.setColumns(10);
 		
 		txt_seconds = new JTextField();
 		txt_seconds.setHorizontalAlignment(SwingConstants.TRAILING);
 		txt_seconds.setColumns(10);
-		txt_seconds.setBounds(187, 36, 46, 20);
+		txt_seconds.setBounds(175, 51, 46, 20);
 		contentPane.add(txt_seconds);
 		
 		txt_millis = new JTextField();
 		txt_millis.setHorizontalAlignment(SwingConstants.TRAILING);
 		txt_millis.setColumns(10);
-		txt_millis.setBounds(283, 36, 46, 20);
+		txt_millis.setBounds(271, 51, 46, 20);
 		contentPane.add(txt_millis);
 		
 		JLabel lblStageTime = new JLabel("Stage Time");
 		lblStageTime.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblStageTime.setBounds(22, 39, 55, 14);
+		lblStageTime.setBounds(10, 54, 55, 14);
 		contentPane.add(lblStageTime);
 		
 		JLabel lblNewLabel_1 = new JLabel("Car");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblNewLabel_1.setBounds(31, 89, 46, 14);
+		lblNewLabel_1.setBounds(19, 146, 46, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		comboBox = new JComboBox<String>();
-		comboBox.setBounds(104, 86, 225, 20);
+		comboBox.setBounds(92, 143, 225, 20);
 		contentPane.add(comboBox);
 		
 		setComboBox();
@@ -114,7 +119,7 @@ public class AddStageResultWindow extends JFrame {
 		lblWarning.setVisible(false);
 		lblWarning.setForeground(Color.RED);
 		lblWarning.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWarning.setBounds(22, 127, 336, 14);
+		lblWarning.setBounds(10, 188, 336, 14);
 		contentPane.add(lblWarning);
 		
 		JButton btnCancel = new JButton("Cancel");
@@ -123,7 +128,7 @@ public class AddStageResultWindow extends JFrame {
 				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			}
 		});
-		btnCancel.setBounds(68, 156, 89, 23);
+		btnCancel.setBounds(56, 213, 89, 23);
 		contentPane.add(btnCancel);
 		
 		JButton btnDone = new JButton("Done");
@@ -137,16 +142,43 @@ public class AddStageResultWindow extends JFrame {
 						lblWarning.setText("Fields must be integers greater than one");
 						lblWarning.setVisible(true);
 					}else{
-						s.addStageResult(getCar((String) comboBox.getSelectedItem()), formatStageTime(txt_minutes.getText(), txt_seconds.getText(), txt_millis.getText()));
-						StageManagementWindow.updateList();
+						Date date = (Date) spinner.getModel().getValue();
+						Calendar c = new GregorianCalendar();
+						c.setTime(date);
+						Rally2.Date date_start = new Rally2.Date(c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), c.get(Calendar.SECOND));
+						atob.addRound(getCar((String) comboBox.getSelectedItem()), formatStageTime(txt_minutes.getText(), txt_seconds.getText(), txt_millis.getText()), date_start);
+						AtoBManagementWindow.updateLists();
 						btnCancel.doClick();
 					}
 				}
-					
 			}
 		});
-		btnDone.setBounds(240, 156, 89, 23);
+		btnDone.setBounds(228, 213, 89, 23);
 		contentPane.add(btnDone);
+		
+		JLabel lblDate = new JLabel("Date");
+		lblDate.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblDate.setBounds(19, 100, 46, 14);
+		contentPane.add(lblDate);
+		
+		spinner = new JSpinner();
+		Calendar c = Calendar.getInstance();
+		Calendar c2 = Calendar.getInstance();
+		Calendar c3 = Calendar.getInstance();  
+		Round round = (Round) atob.round.get(atob.round.size() - 1);
+		Rally2.Date end_date = atob.end_date;
+		Rally2.Date round_date;
+		if(round == null)
+			round_date = atob.beginning_date;
+		else
+			round_date = round.date;
+		
+		c.set(round_date.calendardate.year.intValue(), round_date.calendardate.month.intValue() - 1, round_date.calendardate.day.intValue(), round_date.timestamp.hours.intValue(),  round_date.timestamp.minutes.intValue(), round_date.timestamp.seconds.intValue());
+		c2.set(round_date.calendardate.year.intValue(), round_date.calendardate.month.intValue() - 1, round_date.calendardate.day.intValue(), round_date.timestamp.hours.intValue(),  round_date.timestamp.minutes.intValue() + 10, round_date.timestamp.seconds.intValue());
+		c3.set(end_date.calendardate.year.intValue(), end_date.calendardate.month.intValue() - 1, end_date.calendardate.day.intValue(), end_date.timestamp.hours.intValue(),  end_date.timestamp.minutes.intValue(), end_date.timestamp.seconds.intValue());
+		spinner.setModel(new SpinnerDateModel(c2.getTime(), c.getTime(), c3.getTime(), Calendar.DAY_OF_YEAR));
+		spinner.setBounds(92, 97, 225, 17);
+		contentPane.add(spinner);
 	}
 	
 	public int formatStageTime(String m, String s, String mil){
@@ -157,7 +189,7 @@ public class AddStageResultWindow extends JFrame {
 		String number = s.split(" - ")[0];
 		String team = s.split(" - ")[1];
 		
-		Iterator<Team> ir_teams = ss.teams.iterator();
+		Iterator<Team> ir_teams = atob.teams.iterator();
 		while(ir_teams.hasNext()){
 			Iterator<Car> ir_cars = ir_teams.next().cars.iterator();
 			while(ir_cars.hasNext()){
@@ -171,11 +203,9 @@ public class AddStageResultWindow extends JFrame {
 	
 	public void setComboBox(){
 		comboBox.removeAllItems();
-		
 		ArrayList<Car> all_cars = new ArrayList<>();
-		ArrayList<Car> set_cars = new ArrayList<>();
 		
-		Iterator<Team> ir_teams = ss.teams.iterator();
+		Iterator<Team> ir_teams = atob.teams.iterator();
 		while(ir_teams.hasNext()){
 			Iterator<Car> ir_cars = ir_teams.next().cars.iterator();
 			while(ir_cars.hasNext()){
@@ -183,14 +213,8 @@ public class AddStageResultWindow extends JFrame {
 			}
 		}
 		
-		Iterator<StageResult> ir_srs = stage.stage_results.iterator();
-		while(ir_srs.hasNext()){
-			set_cars.add(ir_srs.next().car);
-		}
-		
 		for(Car c : all_cars){
-			if(!set_cars.contains(c))
-				comboBox.addItem(c.number + " - " + c.team.name);
+			comboBox.addItem(c.number + " - " + c.team.name);
 		}
 	}
 	

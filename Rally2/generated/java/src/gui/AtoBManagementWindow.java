@@ -18,13 +18,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Iterator;
 import java.awt.event.ActionEvent;
+import javax.swing.ListModel;
 
 public class AtoBManagementWindow extends JFrame {
 
 	private JPanel contentPane;
-	private AtoB atob;
+	private static AtoB atob;
 	private JFrame frame;
-	private JList<String> list_rounds;
+	private static JList<String> list_rounds;
+	private static JList<String> list_teams;
 	/**
 	 * Launch the application.
 	 */
@@ -47,7 +49,7 @@ public class AtoBManagementWindow extends JFrame {
 	public AtoBManagementWindow(AtoB atob) {
 		this.frame = this;
 		this.atob = atob;
-		setBounds(100, 100, 823, 486);
+		setBounds(100, 100, 836, 486);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -85,15 +87,31 @@ public class AtoBManagementWindow extends JFrame {
 		JButton btnNewButton = new JButton("Add Round");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AddRoundWindow ct = new AddRoundWindow(atob);
+				ct.setVisible(true);
+				frame.setEnabled(false);
+        		ct.addWindowListener(new java.awt.event.WindowAdapter() {
+        		    @Override
+        		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+        		        frame.setEnabled(true);
+        		    }
+        		});
 			}
 		});
 		btnNewButton.setBounds(136, 401, 156, 23);
 		contentPane.add(btnNewButton);
 		
+		DefaultListModel<String> l_teams = new DefaultListModel<>();
+		list_teams = new JList<String>(l_teams);
+		JScrollPane teams_listScroller = new JScrollPane();
+		teams_listScroller.setViewportView(list_teams);
+		teams_listScroller.setBounds(442, 91, 355, 282);
+		contentPane.add(teams_listScroller);
+		
 		updateLists();
 	}
 
-	public void updateLists(){
+	public static void updateLists(){
 		DefaultListModel<String> l_rounds = new DefaultListModel<>();
 		Iterator<Round> ir_rounds = atob.round.iterator();
 		while(ir_rounds.hasNext()){
@@ -103,6 +121,16 @@ public class AtoBManagementWindow extends JFrame {
 		
 		list_rounds.setModel(l_rounds);
 		list_rounds.repaint();
+		
+		DefaultListModel<String> l_teams = new DefaultListModel<>();
+		Iterator<Team> ir_teams = atob.teams.iterator();
+		while(ir_teams.hasNext()){
+			Team team = ir_teams.next();
+			l_teams.addElement(team.name);
+		}
+		
+		list_teams.setModel(l_teams);
+		list_teams.repaint();
 	}
 	
 	public static String formatTime(int millis){
