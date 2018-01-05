@@ -2,8 +2,11 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
@@ -59,6 +62,28 @@ public class StageManagementWindow extends JFrame {
 		
 		DefaultListModel<String> l_srs = new DefaultListModel<>();
 		list = new JList<String>(l_srs);
+		list.addMouseListener(new MouseAdapter() {
+		    public void mouseClicked(MouseEvent evt) {
+		        JList<String> list = (JList<String>)evt.getSource();
+		        if (evt.getClickCount() == 2) {
+		        	Rectangle r = list.getCellBounds(0, list.getLastVisibleIndex()); 
+		        	if (r != null && r.contains(evt.getPoint())) {
+		        		System.out.println("here");
+		        		int index = list.locationToIndex(evt.getPoint());
+		        		Team team = StartWindow.getTeam(list.getModel().getElementAt(index).split("          ")[2].trim());
+		        		CarInfoWindow tmw = new CarInfoWindow(team.getCar(Integer.parseInt(list.getModel().getElementAt(index).split("          ")[1].trim())));
+		        		tmw.setVisible(true);
+		        		frame.setEnabled(false);
+		        		tmw.addWindowListener(new java.awt.event.WindowAdapter() {
+		        		    @Override
+		        		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+		        		        frame.setEnabled(true);
+		        		    }
+		        		});
+		        	}
+		        }
+		    }
+		});
 		JScrollPane srs_listScroller = new JScrollPane();
 		srs_listScroller.setViewportView(list);
 		srs_listScroller.setBounds(41, 97, 355, 275);

@@ -172,7 +172,6 @@ public class AddRoundWindow extends JFrame {
 			round_date = atob.beginning_date;
 		else
 			round_date = round.date;
-		
 		c.set(round_date.calendardate.year.intValue(), round_date.calendardate.month.intValue() - 1, round_date.calendardate.day.intValue(), round_date.timestamp.hours.intValue(),  round_date.timestamp.minutes.intValue(), round_date.timestamp.seconds.intValue());
 		c2.set(round_date.calendardate.year.intValue(), round_date.calendardate.month.intValue() - 1, round_date.calendardate.day.intValue(), round_date.timestamp.hours.intValue(),  round_date.timestamp.minutes.intValue() + 10, round_date.timestamp.seconds.intValue());
 		c3.set(end_date.calendardate.year.intValue(), end_date.calendardate.month.intValue() - 1, end_date.calendardate.day.intValue(), end_date.timestamp.hours.intValue(),  end_date.timestamp.minutes.intValue(), end_date.timestamp.seconds.intValue());

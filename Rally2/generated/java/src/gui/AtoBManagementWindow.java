@@ -27,6 +27,7 @@ public class AtoBManagementWindow extends JFrame {
 	private JFrame frame;
 	private static JList<String> list_rounds;
 	private static JList<String> list_teams;
+	private JButton btnShowResults;
 	/**
 	 * Launch the application.
 	 */
@@ -107,6 +108,23 @@ public class AtoBManagementWindow extends JFrame {
 		teams_listScroller.setViewportView(list_teams);
 		teams_listScroller.setBounds(442, 91, 355, 282);
 		contentPane.add(teams_listScroller);
+		
+		btnShowResults = new JButton("Show Results");
+		btnShowResults.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AtoBResultsWindow ct = new AtoBResultsWindow(atob);
+				ct.setVisible(true);
+				frame.setEnabled(false);
+        		ct.addWindowListener(new java.awt.event.WindowAdapter() {
+        		    @Override
+        		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+        		        frame.setEnabled(true);
+        		    }
+        		});
+			}
+		});
+		btnShowResults.setBounds(546, 401, 156, 23);
+		contentPane.add(btnShowResults);
 		
 		updateLists();
 	}
