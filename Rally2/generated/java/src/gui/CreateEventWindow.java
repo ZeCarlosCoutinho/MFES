@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import Rally2.*;
@@ -16,14 +17,20 @@ import java.util.GregorianCalendar;
 import java.util.Calendar;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
+import javax.swing.JList;
+import java.awt.Font;
+import javax.swing.AbstractListModel;
 
 public class CreateEventWindow extends JFrame {
 
@@ -32,6 +39,7 @@ public class CreateEventWindow extends JFrame {
 	private JTextField txt_name;
 	private JTextField txt_loc;
 	private JLabel lblPleaseFillAll;
+	private JList<String> list;
 
 	/**
 	 * Launch the application.
@@ -54,7 +62,7 @@ public class CreateEventWindow extends JFrame {
 	 */
 	public CreateEventWindow() {
 		this.frame = this;
-		setBounds(100, 100, 354, 348);
+		setBounds(100, 100, 354, 543);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -111,7 +119,7 @@ public class CreateEventWindow extends JFrame {
 				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			}
 		});
-		btnCancel.setBounds(52, 274, 89, 23);
+		btnCancel.setBounds(52, 459, 89, 23);
 		contentPane.add(btnCancel);
 		
 		JButton btnDone = new JButton("Done");
@@ -133,18 +141,26 @@ public class CreateEventWindow extends JFrame {
 					Rally2.Date date_end = new Rally2.Date(c_end.get(Calendar.YEAR), c_end.get(Calendar.MONTH) + 1, c_end.get(Calendar.DAY_OF_MONTH), c_end.get(Calendar.HOUR_OF_DAY), c_end.get(Calendar.MINUTE), c_end.get(Calendar.SECOND));
 					
 					if(start.before(end)){
-						Event event = null;
-						switch((int) cmb_type.getSelectedIndex()){
-						case 0:
-							event = new AtoB(txt_name.getText(), txt_loc.getText(), date_start, date_end);
-							break;
-						case 1:
-							event = new SpecialStage(txt_name.getText(), txt_loc.getText(), date_start, date_end);
-							break;
+						if(list.getSelectedValuesList().size() == 0){
+							lblPleaseFillAll.setText("Please choose the teams");
+							lblPleaseFillAll.setVisible(true);
+						}else{
+							Event event = null;
+							switch((int) cmb_type.getSelectedIndex()){
+							case 0:
+								event = new AtoB(txt_name.getText(), txt_loc.getText(), date_start, date_end);
+								break;
+							case 1:
+								event = new SpecialStage(txt_name.getText(), txt_loc.getText(), date_start, date_end);
+								break;
+							}
+							for(String s : list.getSelectedValuesList()){
+								event.addTeam(StartWindow.getTeam(s));
+							}
+							StartWindow.events.add(event);
+							StartWindow.updateLists();
+							btnCancel.doClick();
 						}
-						StartWindow.events.add(event);
-						StartWindow.updateLists();
-						btnCancel.doClick();
 					}else{
 						lblPleaseFillAll.setText("End Date is more recent than Start Date");
 						lblPleaseFillAll.setVisible(true);
@@ -152,15 +168,52 @@ public class CreateEventWindow extends JFrame {
 				}
 			}
 		});
-		btnDone.setBounds(179, 274, 89, 23);
+		btnDone.setBounds(179, 459, 89, 23);
 		contentPane.add(btnDone);
 		
 		lblPleaseFillAll = new JLabel("Please fill all the fields");
 		lblPleaseFillAll.setVisible(false);
 		lblPleaseFillAll.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPleaseFillAll.setForeground(Color.RED);
-		lblPleaseFillAll.setBounds(23, 238, 272, 25);
+		lblPleaseFillAll.setBounds(23, 423, 272, 25);
 		contentPane.add(lblPleaseFillAll);
+		
+		DefaultListModel<String> l1 = new DefaultListModel<>();
+		list = new JList<String>(l1);
+		list.setSelectionModel(new DefaultListSelectionModel() {
+		    @Override
+		    public void setSelectionInterval(int index0, int index1) {
+		        if(super.isSelectedIndex(index0)) {
+		            super.removeSelectionInterval(index0, index1);
+		        }
+		        else {
+		            super.addSelectionInterval(index0, index1);
+		        }
+		    }
+		});
+		JScrollPane event_listScroller = new JScrollPane();
+		event_listScroller.setViewportView(list);
+		event_listScroller.setBounds(23, 273, 272, 139);
+		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		contentPane.add(event_listScroller);
+		
+		JLabel lblTeams = new JLabel("Teams");
+		lblTeams.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblTeams.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTeams.setBounds(136, 248, 46, 14);
+		contentPane.add(lblTeams);
+		
+		list.getSelectedValuesList();
+		updateList();
 	}
-
+	
+	private void updateList(){
+		DefaultListModel<String> l1 = new DefaultListModel<>();
+		for (Team t : StartWindow.teams){
+			l1.addElement(t.name);
+		}
+		
+		list.setModel(l1);
+		list.repaint();
+	}
 }
