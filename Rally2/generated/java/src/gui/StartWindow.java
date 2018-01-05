@@ -319,4 +319,13 @@ public class StartWindow {
 		}
 		return null;
 	}
+	
+	public static ArrayList<Event> getTeamEvents(Team team){
+		ArrayList<Event> ret = new ArrayList<>();
+		for (Event event : events){
+			if(event.teams.contains(team))
+				ret.add(event);
+		}
+		return ret;
+	}
 }

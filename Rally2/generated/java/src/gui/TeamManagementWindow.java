@@ -30,6 +30,7 @@ public class TeamManagementWindow extends JFrame {
 	private JFrame frame;
 	public static JList<String> list_members;
 	public static JList<String> list_cars;
+	public static JList<String> list_events;
 
 	/**
 	 * Launch the application.
@@ -115,10 +116,13 @@ public class TeamManagementWindow extends JFrame {
 		cars_listScroller.setBounds(448, 101, 372, 137);
 		contentPane.add(cars_listScroller);
 		
-		JList list_events = new JList();
+		DefaultListModel<String> l_events = new DefaultListModel<>();
+		list_events = new JList<String>(l_events);
 		list_events.setFont(new Font("Monospaced", Font.PLAIN, 12));
-		list_events.setBounds(454, 303, 366, 137);
-		contentPane.add(list_events);
+		JScrollPane events_listScroller = new JScrollPane();
+		events_listScroller.setViewportView(list_events);
+		events_listScroller.setBounds(454, 303, 366, 137);
+		contentPane.add(events_listScroller);
 		
 		updateLists();
 		
@@ -204,11 +208,18 @@ public class TeamManagementWindow extends JFrame {
 			l_cars.addElement(car.number + " - " + car.make + " - " + car.model);
 		}
 		
+		DefaultListModel<String> l_events = new DefaultListModel<>();
+		for(Event e : StartWindow.getTeamEvents(team)){
+			l_events.addElement(e.name);
+		}
+		
 		
 		list_members.setModel(l_members);
 		list_members.repaint();
 		list_cars.setModel(l_cars);
 		list_cars.repaint();
+		list_events.setModel(l_events);
+		list_events.repaint();
 	}
 	
 	public static ArrayList<TeamMember> getNonAssignedMembers(Team team){
