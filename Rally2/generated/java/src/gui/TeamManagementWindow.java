@@ -179,6 +179,19 @@ public class TeamManagementWindow extends JFrame {
 		contentPane.add(btnAddCar);
 		
 		JButton btnEventResults = new JButton("Event Results");
+		btnEventResults.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TeamEventResultsWindow ct = new TeamEventResultsWindow(team);
+				ct.setVisible(true);
+				frame.setEnabled(false);
+        		ct.addWindowListener(new java.awt.event.WindowAdapter() {
+        		    @Override
+        		    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+        		        frame.setEnabled(true);
+        		    }
+        		});
+			}
+		});
 		btnEventResults.setBounds(664, 468, 156, 23);
 		contentPane.add(btnEventResults);
 	}

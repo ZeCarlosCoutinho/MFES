@@ -96,21 +96,17 @@ public class StartWindow {
 		
 		Car car1 = new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team, 1);
 		Car car2 = new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team, 2);
-		Car car6 = new Car("Ford", "Fiesta WRC", 2017, 380, "4WD", 1190, team, 3);
 		Car car3 = new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 10);
 		Car car4 = new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 11);
-		Car car5 = new Car("Toyota", "Yaris WRC", 2017, 380, "4WD", 1190, team2, 12);
 		
 		car1.driver = driver1; car1.co_driver = co1; car1.mechanics.add(mec1); car1.mechanics.add(mec2);
 		car2.driver = driver2; car2.co_driver = co2; car2.mechanics.add(mec3);
-		car6.driver = driver3; car6.co_driver = co3; car6.mechanics.add(mec4);
 		
 		car3.driver = driver12; car3.co_driver = co12; car3.mechanics.add(mec12); car1.mechanics.add(mec22);
 		car4.driver = driver22; car4.co_driver = co22; car4.mechanics.add(mec32);
-		car5.driver = driver32; car5.co_driver = co32; car5.mechanics.add(mec42);	
 
-		team.cars.addAll(new ArrayList<Car>() {{ add(car1); add(car2); add(car6);}});
-		team2.cars.addAll(new ArrayList<Car>() {{ add(car3); add(car4); add(car5);}});
+		team.cars.addAll(new ArrayList<Car>() {{ add(car1); add(car2);}});
+		team2.cars.addAll(new ArrayList<Car>() {{ add(car3); add(car4);}});
 		
 		teams.add(team);
 		teams.add(team2);
@@ -171,6 +167,11 @@ public class StartWindow {
 		
 		events.add(ss);
 		events.add(atob);
+		
+		team.addEvent(atob);
+		team.addEvent(ss);
+		team2.addEvent(atob);
+		team2.addEvent(ss);
 	}
 
 	/**
