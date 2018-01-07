@@ -200,7 +200,7 @@ public class StartWindow {
         		});
 			}
 		});
-		btnCriarEquipa.setBounds(114, 257, 102, 23);
+		btnCriarEquipa.setBounds(104, 257, 124, 23);
 		frame.getContentPane().add(btnCriarEquipa);
 		
 		DefaultListModel<String> l1 = new DefaultListModel<>();
@@ -281,7 +281,7 @@ public class StartWindow {
         		});
 			}
 		});
-		btnCriarEvento.setBounds(456, 257, 102, 23);
+		btnCriarEvento.setBounds(447, 257, 124, 23);
 		frame.getContentPane().add(btnCriarEvento);
 		
 		updateLists();

@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -9,6 +10,7 @@ import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -28,6 +30,9 @@ public class SpecialStageManagementWindow extends JFrame {
 	private static JList<String> list_teams;
 	private JButton btnAddStage;
 	private JButton btnEventResults;
+	private JLabel lblName;
+	private JLabel lblLoc;
+	private JLabel lblStart;
 
 	/**
 	 * Launch the application.
@@ -126,6 +131,26 @@ public class SpecialStageManagementWindow extends JFrame {
 		btnEventResults.setBounds(504, 403, 130, 23);
 		contentPane.add(btnEventResults);
 		
+		lblName = new JLabel(ss.name);
+		lblName.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblName.setBounds(31, 24, 296, 14);
+		contentPane.add(lblName);
+		
+		lblLoc = new JLabel(ss.location);
+		lblLoc.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblLoc.setBounds(31, 49, 296, 14);
+		contentPane.add(lblLoc);
+		
+		lblStart = new JLabel("Start: " + formatDate(ss.beginning_date));
+		lblStart.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblStart.setBounds(414, 24, 296, 14);
+		contentPane.add(lblStart);
+		
+		JLabel lblEnd = new JLabel("End: " + formatDate(ss.end_date));
+		lblEnd.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblEnd.setBounds(414, 49, 296, 14);
+		contentPane.add(lblEnd);
+		
 		updateLists();
 	}
 
@@ -159,5 +184,9 @@ public class SpecialStageManagementWindow extends JFrame {
 				return stage;
 		}
 		return null;
+	}
+	
+	public static String formatDate(Date date){
+		return String.format("%02d:%02d:%02d %02d/%02d/%04d", date.timestamp.hours, date.timestamp.minutes, date.timestamp.seconds, date.calendardate.day, date.calendardate.month, date.calendardate.year);
 	}
 }

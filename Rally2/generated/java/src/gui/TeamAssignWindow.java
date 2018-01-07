@@ -23,6 +23,7 @@ import java.util.Iterator;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
+import javax.swing.ListSelectionModel;
 
 public class TeamAssignWindow extends JFrame {
 
@@ -61,6 +62,7 @@ public class TeamAssignWindow extends JFrame {
 		
 		DefaultListModel<String> l_members = new DefaultListModel<>();
 		list_members = new JList<String>(l_members);
+		list_members.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list_members.setFont(new Font("Monospaced", Font.PLAIN, 12));
 		JScrollPane members_listScroller = new JScrollPane();
 		members_listScroller.setViewportView(list_members);
@@ -69,6 +71,7 @@ public class TeamAssignWindow extends JFrame {
 		
 		DefaultListModel<String> l_cars = new DefaultListModel<>();
 		list_cars = new JList<String>(l_cars);
+		list_cars.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list_cars.setFont(new Font("Monospaced", Font.PLAIN, 12));
 		JScrollPane cars_listScroller = new JScrollPane();
 		cars_listScroller.setViewportView(list_cars);

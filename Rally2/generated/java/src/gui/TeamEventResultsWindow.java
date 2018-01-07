@@ -18,6 +18,7 @@ import java.awt.event.WindowEvent;
 import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.JLabel;
 
 public class TeamEventResultsWindow extends JFrame {
 
@@ -25,6 +26,9 @@ public class TeamEventResultsWindow extends JFrame {
 	private JFrame frame;
 	private Team team;
 	private JList<String> list;
+	private JLabel lblEvent;
+	private JLabel lblPos;
+	private JLabel lblCar;
 
 	/**
 	 * Launch the application.
@@ -59,7 +63,7 @@ public class TeamEventResultsWindow extends JFrame {
 		list.setFont(new Font("Monospaced", Font.PLAIN, 12));
 		JScrollPane list_listScroller = new JScrollPane();
 		list_listScroller.setViewportView(list);
-		list_listScroller.setBounds(10, 11, 414, 277);
+		list_listScroller.setBounds(10, 44, 414, 244);
 		contentPane.add(list_listScroller);
 		
 		JButton btnDone = new JButton("Done");
@@ -70,6 +74,18 @@ public class TeamEventResultsWindow extends JFrame {
 		});
 		btnDone.setBounds(174, 317, 89, 23);
 		contentPane.add(btnDone);
+		
+		lblEvent = new JLabel("Event");
+		lblEvent.setBounds(41, 19, 46, 14);
+		contentPane.add(lblEvent);
+		
+		lblPos = new JLabel("Pos");
+		lblPos.setBounds(310, 19, 46, 14);
+		contentPane.add(lblPos);
+		
+		lblCar = new JLabel("Car #");
+		lblCar.setBounds(345, 19, 46, 14);
+		contentPane.add(lblCar);
 		
 		updateList();
 	}

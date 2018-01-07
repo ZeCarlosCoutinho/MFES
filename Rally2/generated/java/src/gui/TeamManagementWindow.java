@@ -22,6 +22,8 @@ import javax.swing.JButton;
 import org.overture.codegen.runtime.*;
 import java.awt.Font;
 import java.awt.Rectangle;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class TeamManagementWindow extends JFrame {
 
@@ -194,6 +196,12 @@ public class TeamManagementWindow extends JFrame {
 		});
 		btnEventResults.setBounds(664, 468, 156, 23);
 		contentPane.add(btnEventResults);
+		
+		JLabel lblNewLabel = new JLabel(team.name);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setBounds(154, 38, 524, 23);
+		contentPane.add(lblNewLabel);
 	}
 	
 	public static void updateLists(){

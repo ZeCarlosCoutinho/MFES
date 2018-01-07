@@ -22,6 +22,7 @@ import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class StageManagementWindow extends JFrame {
 
@@ -54,7 +55,7 @@ public class StageManagementWindow extends JFrame {
 		this.stage = s;
 		this.ss= ss;
 		this.frame = this;
-		setBounds(100, 100, 451, 495);
+		setBounds(100, 100, 451, 489);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -86,7 +87,7 @@ public class StageManagementWindow extends JFrame {
 		});
 		JScrollPane srs_listScroller = new JScrollPane();
 		srs_listScroller.setViewportView(list);
-		srs_listScroller.setBounds(41, 97, 355, 275);
+		srs_listScroller.setBounds(42, 95, 355, 275);
 		contentPane.add(srs_listScroller);
 		
 		updateList();
@@ -106,7 +107,7 @@ public class StageManagementWindow extends JFrame {
         		});
 			}
 		});
-		btnAddStageResult.setBounds(234, 406, 136, 23);
+		btnAddStageResult.setBounds(235, 404, 136, 23);
 		contentPane.add(btnAddStageResult);
 		
 		JButton btnDone = new JButton("Done");
@@ -115,12 +116,30 @@ public class StageManagementWindow extends JFrame {
 				frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			}
 		});
-		btnDone.setBounds(61, 406, 136, 23);
+		btnDone.setBounds(62, 404, 136, 23);
 		contentPane.add(btnDone);
 		
 		JLabel lblTimeTeam = new JLabel("       time                #           team");
-		lblTimeTeam.setBounds(41, 72, 355, 14);
+		lblTimeTeam.setBounds(42, 70, 355, 14);
 		contentPane.add(lblTimeTeam);
+		
+		JLabel lblName = new JLabel(s.name);
+		lblName.setBounds(42, 11, 156, 14);
+		contentPane.add(lblName);
+		
+		JLabel lblNumber = new JLabel("Stage #" + s.number);
+		lblNumber.setBounds(42, 36, 156, 14);
+		contentPane.add(lblNumber);
+		
+		JLabel lblDist = new JLabel(s.distance + " m");
+		lblDist.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblDist.setBounds(215, 36, 156, 14);
+		contentPane.add(lblDist);
+		
+		JLabel lblDate = new JLabel(formatDate(s.date));
+		lblDate.setHorizontalAlignment(SwingConstants.TRAILING);
+		lblDate.setBounds(215, 11, 156, 14);
+		contentPane.add(lblDate);
 	}
 	
 	public static void updateList(){
@@ -143,6 +162,10 @@ public class StageManagementWindow extends JFrame {
 		int minutes=((millis-seconds)/1000)/60;
 		
 		return String.format("%02d:%02d.%03d", minutes, seconds, m);
+	}
+	
+	public static String formatDate(Date date){
+		return String.format("%02d:%02d:%02d %02d/%02d/%04d", date.timestamp.hours, date.timestamp.minutes, date.timestamp.seconds, date.calendardate.day, date.calendardate.month, date.calendardate.year);
 	}
 
 }

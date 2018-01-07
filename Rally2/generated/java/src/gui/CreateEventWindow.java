@@ -70,7 +70,7 @@ public class CreateEventWindow extends JFrame {
 		
 		JSpinner spinner_start = new JSpinner();
 		spinner_start.setModel(new SpinnerDateModel(new Date(1514894400000L), null, null, Calendar.DAY_OF_YEAR));
-		spinner_start.setBounds(166, 154, 129, 20);
+		spinner_start.setBounds(126, 154, 169, 20);
 		contentPane.add(spinner_start);
 		
 		JLabel lblDateBeginning = new JLabel("Start Date");
@@ -91,7 +91,7 @@ public class CreateEventWindow extends JFrame {
 		txt_name.setColumns(10);
 		
 		JLabel lblLocation = new JLabel("Location");
-		lblLocation.setBounds(23, 67, 46, 14);
+		lblLocation.setBounds(23, 67, 72, 14);
 		contentPane.add(lblLocation);
 		
 		txt_loc = new JTextField();
@@ -110,7 +110,7 @@ public class CreateEventWindow extends JFrame {
 		
 		JSpinner spinner_end = new JSpinner();
 		spinner_end.setModel(new SpinnerDateModel(new Date(1514894400000L), null, null, Calendar.DAY_OF_YEAR));
-		spinner_end.setBounds(166, 196, 129, 20);
+		spinner_end.setBounds(126, 196, 169, 20);
 		contentPane.add(spinner_end);
 		
 		JButton btnCancel = new JButton("Cancel");

@@ -70,11 +70,11 @@ public class AddStageWindow extends JFrame {
 		c.set(ss.beginning_date.calendardate.year.intValue(), ss.beginning_date.calendardate.month.intValue() - 1, ss.beginning_date.calendardate.day.intValue(), ss.beginning_date.timestamp.hours.intValue(),  ss.beginning_date.timestamp.minutes.intValue(), ss.beginning_date.timestamp.seconds.intValue());
 		c2.set(ss.beginning_date.calendardate.year.intValue(), ss.beginning_date.calendardate.month.intValue() - 1, ss.beginning_date.calendardate.day.intValue(), ss.beginning_date.timestamp.hours.intValue() + 1,  ss.beginning_date.timestamp.minutes.intValue(), ss.beginning_date.timestamp.seconds.intValue());
 		spinner_date.setModel(new SpinnerDateModel(c2.getTime(), c.getTime(), null, Calendar.DAY_OF_YEAR));
-		spinner_date.setBounds(153, 160, 129, 20);
+		spinner_date.setBounds(113, 160, 169, 20);
 		contentPane.add(spinner_date);
 		
 		JLabel label_1 = new JLabel("Name");
-		label_1.setBounds(10, 31, 46, 14);
+		label_1.setBounds(10, 31, 76, 14);
 		contentPane.add(label_1);
 		
 		txt_name = new JTextField();
@@ -83,7 +83,7 @@ public class AddStageWindow extends JFrame {
 		contentPane.add(txt_name);
 		
 		JLabel lblDistance = new JLabel("Distance");
-		lblDistance.setBounds(10, 119, 46, 14);
+		lblDistance.setBounds(10, 119, 76, 14);
 		contentPane.add(lblDistance);
 		
 		txt_distance = new JTextField();
@@ -92,7 +92,7 @@ public class AddStageWindow extends JFrame {
 		contentPane.add(txt_distance);
 		
 		JLabel lblNumber = new JLabel("Number");
-		lblNumber.setBounds(10, 75, 46, 14);
+		lblNumber.setBounds(10, 75, 76, 14);
 		contentPane.add(lblNumber);
 		
 		txt_number = new JTextField();

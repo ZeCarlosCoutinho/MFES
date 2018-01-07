@@ -96,7 +96,7 @@ public class TeamAddCarWindow extends JFrame {
 		contentPane.add(textField_model);
 		
 		lblTraction = new JLabel("Traction");
-		lblTraction.setBounds(10, 159, 46, 14);
+		lblTraction.setBounds(10, 159, 75, 14);
 		contentPane.add(lblTraction);
 		
 		comboBox_traction = new JComboBox<String>();

@@ -96,12 +96,12 @@ public class AddStageResultWindow extends JFrame {
 		
 		JLabel lblStageTime = new JLabel("Stage Time");
 		lblStageTime.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblStageTime.setBounds(22, 39, 55, 14);
+		lblStageTime.setBounds(22, 39, 70, 14);
 		contentPane.add(lblStageTime);
 		
 		JLabel lblNewLabel_1 = new JLabel("Car");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblNewLabel_1.setBounds(31, 89, 46, 14);
+		lblNewLabel_1.setBounds(31, 89, 61, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		comboBox = new JComboBox<String>();

@@ -19,6 +19,8 @@ import java.awt.event.MouseEvent;
 import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import javax.swing.ListModel;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class AtoBManagementWindow extends JFrame {
 
@@ -28,6 +30,9 @@ public class AtoBManagementWindow extends JFrame {
 	private static JList<String> list_rounds;
 	private static JList<String> list_teams;
 	private JButton btnShowResults;
+	private JLabel lblName;
+	private JLabel lblLoc;
+	private JLabel lblStart;
 	/**
 	 * Launch the application.
 	 */
@@ -125,6 +130,26 @@ public class AtoBManagementWindow extends JFrame {
 		});
 		btnShowResults.setBounds(546, 401, 156, 23);
 		contentPane.add(btnShowResults);
+		
+		lblName = new JLabel(atob.name);
+		lblName.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblName.setBounds(23, 24, 391, 14);
+		contentPane.add(lblName);
+		
+		lblLoc = new JLabel(atob.location);
+		lblLoc.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblLoc.setBounds(23, 49, 391, 14);
+		contentPane.add(lblLoc);
+		
+		lblStart = new JLabel("Start: " + formatDate(atob.beginning_date));
+		lblStart.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblStart.setBounds(442, 24, 355, 14);
+		contentPane.add(lblStart);
+		
+		JLabel lblEnd = new JLabel("End: " + formatDate(atob.end_date));
+		lblEnd.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblEnd.setBounds(442, 49, 355, 14);
+		contentPane.add(lblEnd);
 		
 		updateLists();
 	}

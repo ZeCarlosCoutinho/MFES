@@ -101,12 +101,12 @@ public class AddRoundWindow extends JFrame {
 		
 		JLabel lblStageTime = new JLabel("Stage Time");
 		lblStageTime.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblStageTime.setBounds(10, 54, 55, 14);
+		lblStageTime.setBounds(10, 54, 70, 14);
 		contentPane.add(lblStageTime);
 		
 		JLabel lblNewLabel_1 = new JLabel("Car");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblNewLabel_1.setBounds(19, 146, 46, 14);
+		lblNewLabel_1.setBounds(19, 146, 61, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		comboBox = new JComboBox<String>();
@@ -158,14 +158,17 @@ public class AddRoundWindow extends JFrame {
 		
 		JLabel lblDate = new JLabel("Date");
 		lblDate.setHorizontalAlignment(SwingConstants.TRAILING);
-		lblDate.setBounds(19, 100, 46, 14);
+		lblDate.setBounds(19, 100, 61, 14);
 		contentPane.add(lblDate);
 		
 		spinner = new JSpinner();
 		Calendar c = Calendar.getInstance();
 		Calendar c2 = Calendar.getInstance();
 		Calendar c3 = Calendar.getInstance();  
-		Round round = (Round) atob.round.get(atob.round.size() - 1);
+		Round round = null;
+		if(atob.round.size() != 0)
+			round = (Round) atob.round.get(atob.round.size() - 1);
+		
 		Rally2.Date end_date = atob.end_date;
 		Rally2.Date round_date;
 		if(round == null)

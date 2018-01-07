@@ -23,6 +23,7 @@ import javax.swing.JList;
 import javax.swing.ListModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 public class AtoBResultsWindow extends JFrame {
 
@@ -30,6 +31,10 @@ public class AtoBResultsWindow extends JFrame {
 	private JFrame frame;
 	private AtoB atob;
 	private JList<String> list;
+	private JLabel lblPos;
+	private JLabel lblTime;
+	private JLabel lblCar;
+	private JLabel lblTeam;
 
 	/**
 	 * Launch the application.
@@ -85,7 +90,7 @@ public class AtoBResultsWindow extends JFrame {
 		});
 		JScrollPane listScroller = new JScrollPane();
 		listScroller.setViewportView(list);
-		listScroller.setBounds(10, 26, 414, 248);
+		listScroller.setBounds(10, 49, 414, 225);
 		contentPane.add(listScroller);
 		
 		JButton btnNewButton = new JButton("Done");
@@ -96,6 +101,22 @@ public class AtoBResultsWindow extends JFrame {
 		});
 		btnNewButton.setBounds(173, 308, 89, 23);
 		contentPane.add(btnNewButton);
+		
+		lblPos = new JLabel("Pos");
+		lblPos.setBounds(10, 24, 46, 14);
+		contentPane.add(lblPos);
+		
+		lblTime = new JLabel("Time");
+		lblTime.setBounds(49, 24, 46, 14);
+		contentPane.add(lblTime);
+		
+		lblCar = new JLabel("Car #");
+		lblCar.setBounds(94, 24, 46, 14);
+		contentPane.add(lblCar);
+		
+		lblTeam = new JLabel("Team");
+		lblTeam.setBounds(142, 24, 46, 14);
+		contentPane.add(lblTeam);
 		
 		updateList();
 	}
