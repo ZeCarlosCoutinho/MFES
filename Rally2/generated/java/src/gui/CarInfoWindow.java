@@ -174,8 +174,10 @@ public class CarInfoWindow extends JFrame {
 	public void updateLists(){
 		DefaultListModel<String> l_members = new DefaultListModel<>();
 		
-		l_members.addElement("Driver    - " + car.driver.name);
-		l_members.addElement("Co-Driver - " + car.co_driver.name);
+		if(car.driver != null)
+			l_members.addElement("Driver    - " + car.driver.name);
+		if(car.co_driver != null)
+			l_members.addElement("Co-Driver - " + car.co_driver.name);
 		
 		Iterator<TeamMember> ir_mec = car.mechanics.iterator();
 		while(ir_mec.hasNext()){
